@@ -42,5 +42,6 @@ public class Assignment2_2 {
         for(int i=0; i<str.length; i++){
             result[i]=Integer.parseInt(str[i]);
         }
+        return result;
     }
 }
