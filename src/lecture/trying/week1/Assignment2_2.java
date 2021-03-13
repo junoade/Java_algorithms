@@ -33,7 +33,7 @@ public class Assignment2_2 {
                 M=M-Integer.parseInt(c[j])*k[j];
             }
         }*/
-
+        return 0;
     }
 
     /* 매번 Integer.parseInt 호출하면 성능이 안좋을것 같아서 문자열 배열 c를 한번에 int[] 로 바꿔놓기 위한 스태틱 메소드 */
