@@ -1,6 +1,5 @@
-package lecture.trying.week1;
+package lecture.week1.GreedyAndBrute00;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /*

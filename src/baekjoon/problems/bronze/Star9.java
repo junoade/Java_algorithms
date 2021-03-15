@@ -1,4 +1,4 @@
-package baekjoon.trying.bronze;
+package baekjoon.problems.bronze;
 
 import java.util.Scanner;
 
