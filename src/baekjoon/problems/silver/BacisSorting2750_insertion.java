@@ -40,11 +40,9 @@ public class BacisSorting2750_insertion {
 
             }
             /* swap */
-
             temp = arr[i];
             arr[i] = arr[min];
             arr[min] = temp;
-
 
         }
         for(int i : arr)
