@@ -3,26 +3,20 @@ package lecture.week2.sorts;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * 컴알골 실습2
- * 문제2. 버블 정렬 함수를 비재귀 재귀 형식으로 모두 구현하고 각각을 이용해 배열N을 재배열 시켜보시오.
- * <p>
- * 2017112095 컴퓨터공학과 최준호
- */
-public class BubbleSorting {
+public class QuickSorting {
     public static void main(String[] args) throws IOException {
         PrintWriter wr_iter;
         PrintWriter wr_rec;
 
-        BubbleSorting bs = new BubbleSorting();
+        QuickSorting qs = new QuickSorting();
 
-        String filePath1 = "C:\\Users\\ajcho\\Desktop\\output\\Bubble_time_result_iter.txt";
-        String filePath2 = "C:\\Users\\ajcho\\Desktop\\output\\Bubble_time_result_rec.txt";
+        String filePath1 = "C:\\Users\\ajcho\\Desktop\\output\\quick_sort\\Quick_result_iter.txt";
+        String filePath2 = "C:\\Users\\ajcho\\Desktop\\output\\quick_sort\\Quick_time_result_rec.txt";
         wr_iter = MyArray.openPrintWriter(filePath1);
         wr_rec = MyArray.openPrintWriter(filePath2);
 
-        long beforeTime = 0, afterTime = 0;
-        double resultTime = 0.0;
+        long beforeTime, afterTime;
+        double resultTime;
         int execute = 1;
         while (execute < 5) {
 
@@ -32,7 +26,7 @@ public class BubbleSorting {
 
             /* Iterative Bubble Sort 시간 측정 및 호출 */
             beforeTime = System.currentTimeMillis();
-            bs.nonRecursive(arr_nonR, N);
+            /*qs.nonRecursive(arr_nonR, N); //정렬 알고리즘 구현 메소드 호출*/
             afterTime = System.currentTimeMillis();
             resultTime = (afterTime - beforeTime) / 1000.0; //ms
             wr_iter.printf("%d %d %f\n", execute, N, resultTime); // 수행 횟수 배열크기 실행시간
@@ -40,11 +34,11 @@ public class BubbleSorting {
 
             /*Recursive Bubble Sort 시간 측정 및 호출 */
             beforeTime = System.currentTimeMillis();
-            bs.Recursive(arr_Rec, N);
+            /*qs.Recursive(arr_Rec,0,N); //정렬 알고리즘 구현 메소드 호출*/
             afterTime = System.currentTimeMillis();
             resultTime = (afterTime - beforeTime) / 1000.0;
             //MyArray.writeTimeResult(filePath2,execute,resultTime);
-            wr_rec.printf("%d %d %f\n",execute, N, resultTime);
+            wr_rec.printf("%d %d %f\n", execute, N, resultTime);
             wr_rec.flush();
 
             /*콘솔창에서 정렬 확인용 (데이터건수가 많아지면 콘솔창 출력만 한세월일듯..*/
@@ -52,20 +46,19 @@ public class BubbleSorting {
             MyArray.printArray(arr_Rec);
 
             /* 정렬 결과 파일 출력*/
-            MyArray.printOutput("C:\\Users\\ajcho\\Desktop\\output\\Bubble_Iterative"+execute+".txt",arr_nonR);
-            MyArray.printOutput("C:\\Users\\ajcho\\Desktop\\output\\Bubble_Recursive"+execute+".txt", arr_Rec);
+            MyArray.printOutput("C:\\Users\\ajcho\\Desktop\\output\\quick_sort\\Quick_Iterative" + execute + ".txt", arr_nonR);
+            MyArray.printOutput("C:\\Users\\ajcho\\Desktop\\output\\quick_sort\\Quick_Recursive" + execute + ".txt", arr_Rec);
 
             execute++;
         }
         wr_iter.close();
         wr_rec.close();
     }
-
     public void nonRecursive(int[] arr, int N) {
         int temp = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N - i - 1; j++) {
-                if (arr[j] < arr[j + 1]) { //앞 인덱스의 배열값이 더 크면, swap
+                if (arr[j] > arr[j + 1]) { //앞 인덱스의 배열값이 더 크면, swap
                     temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
@@ -81,7 +74,7 @@ public class BubbleSorting {
             return;
 
         for (int i = 0; i < n - 1; i++) {
-            if (arr[i] < arr[i + 1]) { //swap
+            if (arr[i] > arr[i + 1]) { //swap
                 temp = arr[i];
                 arr[i] = arr[i + 1];
                 arr[i + 1] = temp;
@@ -90,5 +83,4 @@ public class BubbleSorting {
         Recursive(arr, n - 1);
 
     }
-
 }
