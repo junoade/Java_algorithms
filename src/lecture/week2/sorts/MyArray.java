@@ -3,11 +3,14 @@ package lecture.week2.sorts;
 import java.io.*;
 
 /**
- * 과제를 수행함에 있어서
+ * 컴퓨터알고리즘과 실습 2주차
+ * 2017112095 컴퓨터공학과 최준호
+ *
+ * 과제를 수행함에 있어서 재활용성을 위해 static 메소드를 모아놓음.
  */
 public class MyArray {
 
-    final static int weight = 1000000;
+    final static int weight = 1000000; //1~1000000 랜덤숫자를 받기 위해서,
     /*static int[] arr = new int[N];*/
 
     /* 1~1000000 범위의 랜덤숫자를 배열값으로 할당하는 static 메소드*/

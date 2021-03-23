@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 /**
  * 컴퓨터알고리즘과실습
- * 실습2 - 선택정렬 함수를 비재귀 재귀 형식으로 모두 구현하고 각각을 이용해 배열N을 재배열 시켜보시오
+ * 실습2 - 선택정렬 함수를 비재귀 재귀 형식으로 모두 구현하고 각각을 이용해 배열 N을 재배열 시켜보시오
  * 2017112095 컴퓨터공학과 최준호
  */
 public class SelectionSorting {
@@ -23,6 +23,7 @@ public class SelectionSorting {
         long beforeTime, afterTime;
         double resultTime;
         int execute = 1;
+        System.out.println("2017112095 컴퓨터공학과 최준호_ Selection Sort");
         while (execute < 5) {
 
             int N = (int) Math.pow(10, execute); // 각 시행마다 배열의 사이즈를 달리하도록 10^1 , 10^2, 10^3, 10^4
@@ -36,6 +37,7 @@ public class SelectionSorting {
             resultTime = (afterTime - beforeTime) / 1000.0; //ms
             wr_iter.printf("%d %d %f\n", execute, N, resultTime); // 수행 횟수 배열크기 실행시간
             wr_iter.flush();
+            System.out.printf("%d회차 %-3s %d %f\n", execute,"비재귀", N, resultTime); // 콘솔창 출력
 
             /*Recursive Bubble Sort 시간 측정 및 호출 */
             beforeTime = System.currentTimeMillis();
@@ -45,11 +47,12 @@ public class SelectionSorting {
             //MyArray.writeTimeResult(filePath2,execute,resultTime);
             wr_rec.printf("%d %d %f\n", execute, N, resultTime);
             wr_rec.flush();
+            System.out.printf("%d회차 %-3s %d %f\n", execute, " 재귀",N, resultTime); // 콘솔창 출력
 
-            /*콘솔창에서 정렬 확인용 (데이터건수가 많아지면 콘솔창 출력만 한세월일듯..*/
+            /*콘솔창에서 정렬 확인용 */
             MyArray.printArray(arr_nonR);
             MyArray.printArray(arr_Rec);
-
+           
             /* 정렬 결과 파일 출력*/
             MyArray.printOutput("C:\\Users\\ajcho\\Desktop\\output\\selection_sort\\Selection_Iterative" + execute + ".txt", arr_nonR);
             MyArray.printOutput("C:\\Users\\ajcho\\Desktop\\output\\selection_sort\\Selection_Recursive" + execute + ".txt", arr_Rec);
@@ -60,35 +63,35 @@ public class SelectionSorting {
         wr_rec.close();
     }
 
-    public void nonRecursive(int[] arr, int N) { // 비재귀 선택정렬 알고리즘 구현
-        int min = 0, temp = 0;
+    public void nonRecursive(int[] arr, int N) { // 비재귀 선택정렬 알고리즘 구현 // 내림차순 정렬하기
+        int max = 0, temp = 0;
         for (int i = 0; i < N - 1; i++) {
-            min = i; // 최솟값을 갖는 인덱스 i를 지정
+            max = i; // 최댓값을 갖는 인덱스 i를 지정
             for (int j = i + 1; j < N; j++) {
-                if (arr[j] < arr[min]) { //현재 index j가 갖는 값이 arr[min]보다 더 작은 경우,
-                    min = j; // 인덱스 min을 j로 바꿔줌
+                if (arr[j] > arr[max]) { //현재 index j가 갖는 값이 arr[max]보다 더 큰 경우, // 내림차순
+                    max = j; // 인덱스 min을 j로 바꿔줌
                 }
             }
             //그다음 swap
             temp = arr[i];
-            arr[i] = arr[min];
-            arr[min] = temp;
+            arr[i] = arr[max];
+            arr[max] = temp;
         }
     }
 
     public void Recursive(int[] arr, int i, int n) {
-        int min = i, temp = 0;
+        int max = i, temp = 0;
         for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[min]) {
-                min = j;
+            if (arr[j] > arr[max]) {
+                max = j;
             }
         }
         //swap
         temp=arr[i];
-        arr[i]=arr[min];
-        arr[min]=temp;
+        arr[i]=arr[max];
+        arr[max]=temp;
 
-        if(i+1<n)
+        if(i+1<n) // 배열의 길이보다 최댓값 인덱스가 작을때,
             Recursive(arr,i+1,n);
 
     }
