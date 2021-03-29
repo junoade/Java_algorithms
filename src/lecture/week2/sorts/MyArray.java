@@ -8,10 +8,16 @@ import java.io.*;
  *
  * 과제를 수행함에 있어서 재활용성을 위해 static 메소드를 모아놓음.
  */
-public class MyArray {
+ class MyArray {
+
 
     final static int weight = 1000000; //1~1000000 랜덤숫자를 받기 위해서,
     /*static int[] arr = new int[N];*/
+
+    /*데스크탑 경로*/
+    /*static String yourPath(){
+        return
+    }*/
 
     /* 1~1000000 범위의 랜덤숫자를 배열값으로 할당하는 static 메소드*/
     static int[] getArray(int N) {
