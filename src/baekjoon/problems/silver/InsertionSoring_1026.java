@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Greedy?
  * 아 A배열의 최솟값 x B의 배열의 최댓값
  */
-public class InsertionSoring1026 {
+public class InsertionSoring_1026 {
 
     static int solution(int[] A, int[] B, int N) {
         //A에서 최소값 찾아서 B랑 곱함
