@@ -64,6 +64,19 @@ class MyArray { // 접근 제한자는 default로 같은 패키지 내에서만 
             return null;
         int[] result = new int[origin.length]; //새 배열공간을 메모리에 할당하고,
         result = origin.clone();
+
+        /* 클래스의 객체를 deep copy할 땐, 인스턴스 멤버의 참조변수 역시 새로운 주소값을 할당해줘야함. */
+        /* example.
+        * public Circle deepCopy(){
+        *   Object obj = null;
+        *   try{
+        *      obj = super.clone();
+        *   }catch(CloneNotSupportException e){}
+        *   Circle c = (Circle)obj;
+        *   c.p = new Point(this.p.x, this.p.y); // 예를 들어, Circle 클래스의 인스턴스 멤버로 Point p; 가 선언되어있다면,
+        *   return c;
+        * }
+        * */
         return result;
     }
 
