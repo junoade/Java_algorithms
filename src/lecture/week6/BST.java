@@ -136,6 +136,7 @@ public class BST {
         }
         return p;
     }
+
     /* deleteSub에서 case3 를 위해 가장 작은 키값을 갖는 찾는 메소드*/
     public int findMostLeft(Node p) {
         int min = p.getKey();
