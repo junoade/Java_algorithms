@@ -4,7 +4,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+/**
+ * 컴퓨터알고리즘과실습_03, 주종화 교수님
+ * 실습9 스트링 매칭
+ * 2017112095 컴퓨터공학과 최준호
+ */
 public class RandomGenerator {
     private String filepath;
     private int SIZE;
