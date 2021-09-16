@@ -22,28 +22,29 @@ public class BlackJack_2798 {
             input = br.readLine();
 
             StringTokenizer st = new StringTokenizer(input);
-            N=Integer.parseInt(st.nextToken());
-            M=Integer.parseInt(st.nextToken());
+            N = Integer.parseInt(st.nextToken());
+            M = Integer.parseInt(st.nextToken());
 
-            input=br.readLine();
-            arr=convertTointArr(input.split(" "));
-            System.out.println(solution(N,M,arr));
+            input = br.readLine();
+            arr = convertTointArr(input.split(" "));
+            System.out.println(solution(N, M, arr));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-    static int solution(int N, int M,int[] a){
-        int[] best_arr=new int[3];
-        int sum=0;//maxNum과 비교,
-        int max=0;
-        for(int i=0; i<N; i++){
-            for(int j=i+1; j<N; j++){
-                for(int k=j+1; k<N; k++){
-                    sum=a[i]+a[j]+a[k];
-                    if(sum>max && sum<=M){
-                        max=sum;
+
+    static int solution(int N, int M, int[] a) {
+        int[] best_arr = new int[3];
+        int sum = 0;//maxNum과 비교,
+        int max = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = i + 1; j < N; j++) {
+                for (int k = j + 1; k < N; k++) {
+                    sum = a[i] + a[j] + a[k];
+                    if (sum > max && sum <= M) {
+                        max = sum;
                         /*best_arr[0]=a[i];
                         best_arr[1]=a[j];
                         best_arr[2]=a[k];*/
@@ -55,15 +56,18 @@ public class BlackJack_2798 {
         /*printArr(best_arr);*/
         return max;
     }
-    static int[] convertTointArr(String[] str){
+
+    static int[] convertTointArr(String[] str) {
         int[] temp = new int[str.length];
-        for(int i=0; i<str.length; i++)
-            temp[i]=Integer.parseInt(str[i]);
+        for (int i = 0; i < str.length; i++)
+            temp[i] = Integer.parseInt(str[i]);
         return temp;
     }
-    static void printArr(int[] a){
-        for(int i : a)
-            System.out.print(i+" ");
+
+    static void printArr(int[] a) {
+        for (int i : a)
+            System.out.print(i + " ");
         System.out.println();
     }
 }
+
