@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * 핵심 N명이 둥글게 있다고 할때 K번째 사람을 제거하고 이를 반복함
  * 제거된 사람들의 순열을 요세푸스 순열이라고 부른다.
  */
-public class Josephus_01 {
+public class Josephus_1158 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
