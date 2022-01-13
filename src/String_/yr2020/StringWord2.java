@@ -1,4 +1,4 @@
-package programmers.kakao.internship.yr2020;
+package String_.yr2020;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 /**
  * 2021 카카오 채용 연계형 인턴쉽
- * 2차 풀이
+ * 2차 풀이 - 문자열 유형
  */
 public class StringWord2 {
     public static void main(String[] args) throws IOException {

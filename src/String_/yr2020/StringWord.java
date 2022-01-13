@@ -1,4 +1,5 @@
-package programmers.kakao.internship.yr2020;
+/*
+package string.yr2020;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,10 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+*/
 /**
  * 2021 카카오 채용 연계형 인턴쉽
  * 숫자 문자열과 영단어 1차 풀이 0918
- */
+ *//*
+
 public class StringWord {
 
     public static HashMap<Integer, String> map = new HashMap<>() {{
@@ -35,7 +38,9 @@ public class StringWord {
     }
 
     public static void solution(String s) {
-        /*StringTokenizer st = new StringTokenizer(s); 구분자가 없어 아니라 이 방법 패스*/
+        */
+/*StringTokenizer st = new StringTokenizer(s); 구분자가 없어 아니라 이 방법 패스*//*
+
         String cursor = "";
         String number = "";
         int i = 0;
@@ -73,3 +78,4 @@ public class StringWord {
         return null;
     }
 }
+*/
