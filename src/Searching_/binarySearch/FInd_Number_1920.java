@@ -37,8 +37,8 @@ public class FInd_Number_1920 {
         st = new StringTokenizer(br.readLine(), " "); // 공백을 구분자로, int[] arr에서 찾을 값들을 받음
         StringBuffer sb = new StringBuffer(); // 출력 성능을 위해
 
-        for(int i = 0; i<M; i++){
-            /* 찾았을 경우 */
+        /*for(int i = 0; i<M; i++){
+            *//* 찾았을 경우 *//*
             if(binary_search_iter(Integer.parseInt(st.nextToken()))){
                 sb.append(1);
             }else{
@@ -49,6 +49,22 @@ public class FInd_Number_1920 {
             }
         }
         System.out.println(sb);
+        */
+
+        /* recursive */
+        for(int i = 0; i<M; i++){
+            /* 찾았을 경우 */
+            if(binary_search_rec(0, arr.length-1, Integer.parseInt(st.nextToken()))){
+                sb.append(1);
+            }else{
+                sb.append(0);
+            }
+            if(i < M-1){
+                sb.append("\n");
+            }
+        }
+        System.out.println(sb);
+
     }
 
     /**
@@ -62,7 +78,7 @@ public class FInd_Number_1920 {
         int right = arr.length - 1;
 
         while(left <= right){
-            int mid = (left + right)/2;
+            int mid = (left + right)/2; // bit 연산을 활용하여 (left+right)>>>1를 할수있다.
             if(arr[mid] == key){
                 return true;
             }else if(arr[mid] < key){
@@ -73,5 +89,21 @@ public class FInd_Number_1920 {
         }
         /* 못 찾았을 때 */
         return false;
+    }
+
+    public static boolean binary_search_rec(int left, int right, int key){
+        /* base case */
+        if(left>right)
+            return false;
+
+        int mid = (left +right)/2;
+
+        if(arr[mid] == key){
+            return true;
+        }else if(arr[mid] < key){
+            return binary_search_rec(mid+1, right, key);
+        }else{
+            return binary_search_rec(left, mid-1, key);
+        }
     }
 }
