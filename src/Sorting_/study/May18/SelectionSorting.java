@@ -1,4 +1,4 @@
-package study.May18;
+package Sorting_.study.May18;
 
 public class SelectionSorting {
 
