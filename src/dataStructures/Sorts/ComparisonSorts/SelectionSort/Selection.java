@@ -1,4 +1,4 @@
-package DataStructures.Sorts.ComparisonSorts.SelectionSort;
+package dataStructures.Sorts.ComparisonSorts.SelectionSort;
 
 /**
  * Selection Sort is..

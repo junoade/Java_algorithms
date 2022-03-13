@@ -1,4 +1,4 @@
-package DataStructures.Sorts.ComparisonSorts.BubbleSort;
+package dataStructures.Sorts.ComparisonSorts.BubbleSort;
 
 /**
  * What is a  bubble sort?
