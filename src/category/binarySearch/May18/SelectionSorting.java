@@ -1,4 +1,4 @@
-package Sorting_.study.May18;
+package category.binarySearch.May18;
 
 public class SelectionSorting {
 

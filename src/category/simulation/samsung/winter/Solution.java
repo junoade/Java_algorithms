@@ -1,4 +1,4 @@
-package Simulation.samsung.winter;
+package category.simulation.samsung.winter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

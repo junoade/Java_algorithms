@@ -1,4 +1,4 @@
-package Simulation.programmers.level1;
+package category.simulation.programmers.level1;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package Simulation.samsung.winter;
+package category.simulation.samsung.winter;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

@@ -1,4 +1,4 @@
-package Searching_.binarySearch;
+package category.binarySearch;
 
 import java.io.BufferedReader;
 import java.io.IOException;
