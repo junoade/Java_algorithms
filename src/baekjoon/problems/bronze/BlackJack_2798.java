@@ -43,8 +43,8 @@ public class BlackJack_2798 {
             for (int j = i + 1; j < N; j++) {
                 for (int k = j + 1; k < N; k++) {
                     sum = a[i] + a[j] + a[k];
-                    if (sum > max && sum <= M) {
-                        max = sum;
+                    if (sum > max && sum <= M) { // M 을 넘지 않는 선에서,
+                        max = sum; // max 갱신
                         /*best_arr[0]=a[i];
                         best_arr[1]=a[j];
                         best_arr[2]=a[k];*/
