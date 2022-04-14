@@ -7,7 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Programmers
+ * Programmers 월간 코드 챌린지, 없는 숫자 더하기
+ *
+ * ### 내가 푼 방식 : Set 구현체에 입력으로 받은 numbers를 넣음
+ * 1. 순서가 중요하지 않았고, 반복되는 숫자가 없었음
+ * 2. Set.contains() 을 통해 O(1) 시간 복잡도로 조회가 가능했기 때문
+ * 3. 그 다음 0~9 범위의 숫자를 순회하며, 없는 숫자를 찾아 합을 구했음
  */
 public class AddNotExistNum {
     public static void main(String[] args) throws IOException {
