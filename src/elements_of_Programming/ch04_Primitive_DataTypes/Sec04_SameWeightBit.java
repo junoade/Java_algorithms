@@ -1,4 +1,4 @@
-package category.bit.practice;
+package elements_of_Programming.ch04_Primitive_DataTypes;
 
 /**
  * CH04.04 같은 무게를 갖는 가장 가까운 정수 찾기

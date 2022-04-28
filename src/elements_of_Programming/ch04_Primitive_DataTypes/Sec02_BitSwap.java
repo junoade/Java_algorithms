@@ -1,4 +1,4 @@
-package category.bit.practice;
+package elements_of_Programming.ch04_Primitive_DataTypes;
 
 /**
  * CH04.02 비트 스왑
