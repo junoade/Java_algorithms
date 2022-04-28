@@ -1,7 +1,7 @@
 package elements_of_Programming.ch04_Primitive_DataTypes;
 
 /**
- * CH04.02 비트 스왑
+ * <title>CH04.02 비트 스왑</title>
  * <p>
  * 주어진 정수의 i 번째 비트와 j번째 비트를 스왑하는 코드를 작성하는 방법
  */
@@ -38,17 +38,20 @@ public class Sec02_BitSwap {
     }
 
     public static void main(String[] args) throws IOException {
+        /* 입력 처리부 */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         long x = Long.parseLong(st.nextToken());
         short i = Short.parseShort(st.nextToken());
         short j = Short.parseShort(st.nextToken());
 
+        /* 테스트 관련 */
         long start = System.nanoTime();
         System.out.println("비트스왑 테스트 01_ 내 방법 : " + my_way_swap(x, i, j));
         long end = System.nanoTime();
-        System.out.println(">>> 수행 시간 : " + (end-start) / Math.pow(10, 9)); // 타입 캐스팅이 빈번하게 되어 있어서 좀 실제롷는 오래 걸리는 듯
-
+        System.out.println(">>> 수행 시간 : " + (end-start) / Math.pow(10, 9)); // 타입 캐스팅이 빈번하게 되어 있어서 좀 실제로는 오래 걸리는 듯
+        
         start = System.nanoTime();
         System.out.println("비트스왑 테스트 02_ 교재 : " + swapBits(x, i, j));
         end = System.nanoTime();
