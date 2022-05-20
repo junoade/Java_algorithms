@@ -1,14 +1,21 @@
-package category.bit.practice;
+package elements_of_Programming.ch04_Primitive_DataTypes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * CH04.01 패리티 계산하기
- * <p>
- * 패리티? Error Detection 을 위해 비트 1의 개수를 세서 even parity라면 parity = 0, odd parity 라면 parity = 1로
+ * <title>CH04.01 패리티 계산하기</title>
+ *
+ * @def 패리티 : 데이터 통신에서, 송신하고자 하는 데이터의 각 비트에서 1의 개수가 짝수 인지 홀수인지 새서,
+ * even parity 면 0
+ * odd parity 면 1
+ * 로 나타내어, Error Detecting 하는 방법
+ * @topic 64비트 숫자 하나의 패리티를 계산을 어떻게 효율적으로 할 수 있을까?
+ * @ref 노션_망각주기_비트연산정리
+ * @ref 알고리즘 문제 해결 전략
  */
+
 public class Sec01_Parity {
 
     /* step1) 1로 세팅된 모든 비트의 개수세기, O(N) */
@@ -27,7 +34,14 @@ public class Sec01_Parity {
         return result;
     }
 
-    /* step2) 하위비트를 한번에 지워, 최선-평균의 경우의 성능 향상시키기, O(k) */
+    /**
+     * step2) 하위비트를 한번에 지워, 최선-평균의 경우의 성능 향상시키기, O(k)
+     * 예를 들어 x = 1011 0010 이라하면, x-1 = 1011 0001 이다.
+     * x & (x-1) 연산을 취하면, 1011 이외의 lower bit 자리는 모두 0으로 된다. (지워진다)
+     * 이를 반복하면, 1의 개수 k 만큼의 시간복잡도로 문제를 해결할 수 있게 된다.
+     * <p>
+     * 최종 parity 결정 역시 1의 개수에 따라 홀수 개면 ->1->0->1 이렇게 홀수를 리턴할 것이다. O(k)
+     */
     public static short parity_O_K(long x) {
         // x의 제일 오른쪽에 있는 1비트 이하를 (x-1)과 & 연산함으로서 0으로 지울 수 있다.
         // 결과적으로 x의 이진표현 중 1의 개수 k 만큼의 시간복잡도를 갖게 된다.
@@ -72,15 +86,15 @@ public class Sec01_Parity {
         // Long.parseInt(st.nextToken());
         long x = Long.parseLong(br.readLine());
         long start = System.nanoTime();
-        System.out.println("패리티 체크 1 - " + parity_O_N(x) + ", 수행 시간 : " + (System.nanoTime() - start)/Math.pow(10, 9));
+        System.out.println("패리티 체크 1 - " + parity_O_N(x) + ", 수행 시간 : " + (System.nanoTime() - start) / Math.pow(10, 9));
 
         start = System.nanoTime();
-        System.out.println("패리티 체크 2 - " + parity_O_K(x) + ", 수행 시간 : " + (System.nanoTime() - start)/Math.pow(10, 9));
+        System.out.println("패리티 체크 2 - " + parity_O_K(x) + ", 수행 시간 : " + (System.nanoTime() - start) / Math.pow(10, 9));
 
         // start = System.nanoTime();
         // System.out.println("패리티 체크 3 - " + parity_O_K(x) + ", 수행 시간 : " + (System.nanoTime() - start)/Math.pow(10, 9));
 
         start = System.nanoTime();
-        System.out.println("패리티 체크 4 - " + parity_log(x) + ", 수행 시간 : " + (System.nanoTime() - start)/Math.pow(10, 9));
+        System.out.println("패리티 체크 4 - " + parity_log(x) + ", 수행 시간 : " + (System.nanoTime() - start) / Math.pow(10, 9));
     }
 }

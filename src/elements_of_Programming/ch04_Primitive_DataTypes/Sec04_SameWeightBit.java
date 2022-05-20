@@ -1,4 +1,4 @@
-package category.bit.practice;
+package elements_of_Programming.ch04_Primitive_DataTypes;
 
 /**
  * CH04.04 같은 무게를 갖는 가장 가까운 정수 찾기
@@ -7,6 +7,11 @@ package category.bit.practice;
  *
  * ex) 92의 2진수는 (1011100)_2 되므로 무게는 4가 됨.
  * 무게가 4, 다시 말해 1비트의 개수가 4인 정수 중 92이랑 가장 가까운 숫자는?
+ *
+ * @idea 맨 오른쪽의 1의 자리를 SHL 하는 방식?
+ *
+ * @see category.bit.DifferentBit_Min_02
  */
 public class Sec04_SameWeightBit {
+
 }
