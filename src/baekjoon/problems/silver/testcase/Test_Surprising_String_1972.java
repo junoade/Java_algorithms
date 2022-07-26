@@ -3,8 +3,6 @@ package baekjoon.problems.silver.testcase;
 import baekjoon.problems.silver.Surprising_String_1972;
 import junit.framework.TestCase;
 
-import java.util.Random;
-
 public class Test_Surprising_String_1972 extends TestCase {
 
     public void testTimeLimit() {
