@@ -20,7 +20,6 @@ public class DifferentBit_Min_02 {
         for(int i = 0; i<numbers.length; i++){
             answer[i] = calculate(numbers[i]);
         }
-
         return answer;
     }
 
