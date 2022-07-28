@@ -22,7 +22,7 @@ import java.util.StringTokenizer;
  *
  * 채점 : 1.212ms
  */
-public class GetPrimeBetween {
+public class GetPrimeBetween_1929 {
 
     /**
      *

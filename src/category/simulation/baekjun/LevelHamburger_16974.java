@@ -31,7 +31,7 @@ import java.util.StringTokenizer;
  * a_n = \sigma 6^{n-2} + 2^{n-1} (n>=1)
  * a_0 = 1;
  */
-public class LevelHamburger {
+public class LevelHamburger_16974 {
 
     public static final int LAYER = 50;
     public static long[] burger = new long[LAYER + 1]; // 각 Layer의 먹을 수 있는 패티 또는 번의 개수
@@ -99,7 +99,6 @@ public class LevelHamburger {
 
         solution(N, X);
     }
-
 
     /**
      * 1차풀이 - 재귀함수 이용 햄버거 구하고 나서 계산하기
