@@ -9,7 +9,7 @@ package category.greedy;
  * 2. budget - d[i] < 0 조건에서만 예산 배정하기
  * 3. 배정 받은 부서의 개수를 counting 하다가 max로 swap 해주기
  */
-public class Budget {
+public class Budget_lv1 {
     public static int solution(int[] d, int budget) {
         int answer = 0;
         // O(N^2) 버블 소트, 오름차순 정렬

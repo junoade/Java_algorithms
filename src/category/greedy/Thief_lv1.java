@@ -24,7 +24,7 @@ import java.io.*;
  * 3. 그외 도난받은 학생들에게 자신의 키값의 -1~+1 에 적절한 여분을 -1 부터 배정한다. (이를 위해 정렬 필요)
  *
  */
-public class Thief {
+public class Thief_lv1 {
 
     public static int solution(int N, int[] lost, int[] reserve) {
         int answer = N - lost.length;
