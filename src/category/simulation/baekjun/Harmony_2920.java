@@ -10,8 +10,7 @@ import java.io.*;
  * 코드 길이 952B, 시간 128ms
  *
  * ### 강사 풀이
- *
- *
+ * - boolean asc, desc를 선언하고, 해당 조건에 따라 mixed 반환하기
  *
  * ### 다른 사람 풀이
  * String asc ="1 2 3 .. 8"; 처럼 미리 정의해놓고,
