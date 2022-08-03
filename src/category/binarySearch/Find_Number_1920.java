@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  * - 입력 범위와 시간을 보아
  * - 예제 입력에서 입력으로 찾는 대상 리스트 개수, 리스트, 찾을 숫자 리스트 개수 찾을 숫자 리스트를 받는다.
  */
-public class FInd_Number_1920 {
+public class Find_Number_1920 {
 
     public static int[] arr;
 
