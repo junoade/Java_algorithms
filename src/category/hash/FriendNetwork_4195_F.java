@@ -21,7 +21,7 @@ import java.io.*;
  * -> 아 T가 커지면 시간이 O(T*100,000)겠구나...
  * --------------------------------------------------------------
  */
-public class FriendNetwork_4195 {
+public class FriendNetwork_4195_F {
 
     static ArrayList<HashSet<String>> users;
 
