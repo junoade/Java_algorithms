@@ -53,16 +53,6 @@ public class PrinterQueue_1966 {
         System.out.println(count);
     }
 
-    public static int max(ArrayList<Element> list) {
-        int max = 0;
-        for (Element e : list) {
-            if (e.priority >= max) {
-                max = e.priority;
-            }
-        }
-        return max;
-    }
-
     public static void sort(ArrayList<Element> list){
         for (int i = 0; i < list.size(); i++) {
             Element head = list.get(0);
@@ -72,6 +62,16 @@ public class PrinterQueue_1966 {
                 list.remove(0);
             }
         }
+    }
+
+    public static int max(ArrayList<Element> list) {
+        int max = 0;
+        for (Element e : list) {
+            if (e.priority >= max) {
+                max = e.priority;
+            }
+        }
+        return max;
     }
 
     public static void main(String[] args) throws IOException {
