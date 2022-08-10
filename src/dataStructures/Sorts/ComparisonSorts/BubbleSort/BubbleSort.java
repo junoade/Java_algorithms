@@ -2,7 +2,7 @@ package dataStructures.Sorts.ComparisonSorts.BubbleSort;
 
 /**
  * What is a  bubble sort?
- * epeatedly swapping the adjacent elements if they are in wrong order.
+ * repeatedly swapping the adjacent elements if they are in wrong order.
  */
 public class BubbleSort {
     public static void bubbleSort(Comparable[] a) {
