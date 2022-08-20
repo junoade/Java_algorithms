@@ -2,6 +2,7 @@ package dataStructures.tree.bst;
 
 public class MyBinarySearchTree implements BinarySearchTreeAPI {
     Node root = null;
+    StringBuilder sb;
 
     /**
      * @param value
@@ -28,8 +29,7 @@ public class MyBinarySearchTree implements BinarySearchTreeAPI {
         if (isEmpty()) {
             return null;
         } else {
-            Node findNode = iterativeSearch(value);
-            return findNode;
+            return iterativeSearch(value);
         }
     }
 
@@ -58,7 +58,7 @@ public class MyBinarySearchTree implements BinarySearchTreeAPI {
                     cursor.left = new Node(value);
                     break;
                 }
-            } else if(value > cursor.value){ // 오른쪽 Node에 들어가야 할 때
+            } else if (value > cursor.value) { // 오른쪽 Node에 들어가야 할 때
                 if (cursor.right != null) {
                     cursor = cursor.right;
                 } else {
@@ -78,5 +78,27 @@ public class MyBinarySearchTree implements BinarySearchTreeAPI {
     @Override
     public Node recursiveSearch(int value) {
         return null;
+    }
+
+    /**
+     * 재귀함수를 호출하는 부분
+     */
+    @Override
+    public void printTreeByInorder() {
+        sb = new StringBuilder();
+        printTreeByInorder(root);
+    }
+
+    /**
+     * recursive한 방법으로 출력
+     */
+    @Override
+    public void printTreeByInorder(Node node) {
+        if (node == null)
+            return;
+
+        printTreeByInorder(node.left);
+        sb.append((char)node.value).append(" ");
+        printTreeByInorder(node.right);
     }
 }

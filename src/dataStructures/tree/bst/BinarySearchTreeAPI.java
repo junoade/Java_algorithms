@@ -6,4 +6,6 @@ public interface BinarySearchTreeAPI {
     boolean isEmpty();
     Node iterativeSearch(int value);
     Node recursiveSearch(int value);
+    void printTreeByInorder();
+    void printTreeByInorder(Node node);
 }
