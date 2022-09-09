@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.StringTokenizer;
-// import java.util.HashMap;
-import java.lang.Comparable;
 
 /**
  * --------------------------------------------------------------<br/>
@@ -33,7 +31,7 @@ public class Fractional_Knapsack_Problem {
         double result = 0.0;
         double availWeight = MAX_WEIGHT;
 
-        /* step1) 가치를 기준으로 내림차순 정렬 O(N^2)*/
+        /* step1) 단위 가치를 기준으로 내림차순 정렬 O(N log N)*/
         // sortByValue(items);
         sortByPartialValue(items);
 
