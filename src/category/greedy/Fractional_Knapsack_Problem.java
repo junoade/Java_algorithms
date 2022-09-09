@@ -1,6 +1,8 @@
 package category.greedy;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 // import java.util.HashMap;
 import java.lang.Comparable;
@@ -27,27 +29,17 @@ public class Fractional_Knapsack_Problem {
     // HashMap<Integer, Integer> map;
     // 사실 static class 로 만드는 것도... compareTo override
 
-    public static double solution(int[][] items, int MAX_WEIGHT) {
+    public static double solution(Integer[][] items, int MAX_WEIGHT) {
         double result = 0.0;
         double availWeight = MAX_WEIGHT;
 
         /* step1) 가치를 기준으로 내림차순 정렬 O(N^2)*/
-        for (int i = 0; i < items.length; i++) {
-            for (int j = 0; j < items[0].length - 1; j++) {
-                if (items[j][1] <= items[j + 1][1]) {
-                    // swap
-                    int tempW = items[j][0];
-                    int tempV = items[j][1];
-                    items[j][0] = items[j + 1][0];
-                    items[j][1] = items[j + 1][1];
-                    items[j + 1][0] = tempW;
-                    items[j + 1][1] = tempV;
-                }
-            }
-        }
+        // sortByValue(items);
+        sortByPartialValue(items);
+
 
         /* item[0] : weight, item[1] : value */
-        for (int[] item : items) {
+        for (Integer[] item : items) {
             if (availWeight >= item[0]) {
                 result += item[1]; // 가치를 그냥 추가
                 availWeight -= item[0];
@@ -64,12 +56,40 @@ public class Fractional_Knapsack_Problem {
         return result;
     }
 
+    static void sortByValue(Integer[][] items){
+        for (int i = 0; i < items.length; i++) {
+            for (int j = 0; j < items[0].length - 1; j++) {
+                if (items[j][1] <= items[j + 1][1]) {
+                    // swap
+                    int tempW = items[j][0];
+                    int tempV = items[j][1];
+                    items[j][0] = items[j + 1][0];
+                    items[j][1] = items[j + 1][1];
+                    items[j + 1][0] = tempW;
+                    items[j + 1][1] = tempV;
+                }
+            }
+        }
+    }
+
+    static void sortByPartialValue(Integer[][] items){
+        Arrays.sort(items, new Comparator<Integer[]>(){
+            @Override
+            public int compare(Integer[] item1, Integer[] item2){
+                // v / w
+                double rate1 = item1[1] / (double) item1[0];
+                double rate2 = item2[1] / (double) item1[0];
+                return (int) (rate2 - rate1); // 내림차순 정렬
+            }
+        });
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         final int ITEM_COUNT = Integer.parseInt(st.nextToken());
         final int MAX_WEIGHT = Integer.parseInt(st.nextToken());
-        int[][] items = new int[2][ITEM_COUNT];
+        Integer[][] items = new Integer[2][ITEM_COUNT];
 
         for (int i = 0; i < ITEM_COUNT; i++) {
             st = new StringTokenizer(br.readLine());
