@@ -1,4 +1,4 @@
-package category.simulation.programmers;
+package category.queue;
 
 import java.util.*;
 
