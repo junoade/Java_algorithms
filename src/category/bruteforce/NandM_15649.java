@@ -8,7 +8,8 @@ import java.util.StringTokenizer;
 public class NandM_15649 {
 
     static int N, M;
-    static int[] numbers;
+    static int[] numbers; // [0, M+1)
+    static int[] used; // [0, N+1)
     static StringBuilder sb = new StringBuilder();
 
     static void appendNextDigit(int digit) {
@@ -18,11 +19,17 @@ public class NandM_15649 {
             sb.append("\n");
         } else {
             for (int i = 1; i <= N; i++) {
-                if (digit >= 2 && containsKey(i, digit - 1))
-                    continue;
+                if (used[i] == 1) continue;
+                // update
                 numbers[digit] = i;
+                used[i] = 1;
+
+                //go next
                 appendNextDigit(digit + 1);
-                numbers[digit] = 0; // 현재 자릿수의 값을 명시적으로 0으로 초기화 해줌
+
+                // 현재 자릿수의 값을 명시적으로 0으로 초기화 해줌
+                numbers[digit] = 0;
+                used[i] = 0;
 
             }
         }
@@ -41,6 +48,7 @@ public class NandM_15649 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         numbers = new int[M + 1];
+        used = new int[N + 1];
     }
 
     public static void main(String[] args) throws IOException {
