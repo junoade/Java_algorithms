@@ -27,7 +27,7 @@ public class PressKeyBoard {
     final HashMap<Character, String> map;
 
     PressKeyBoard(){
-        map = new HashMap();
+        map = new HashMap<>();
         map.put('1', "1.,?!");
         map.put('2', "2ABC");
         map.put('3', "3DEF");
