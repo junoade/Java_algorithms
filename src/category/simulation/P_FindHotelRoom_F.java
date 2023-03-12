@@ -52,7 +52,7 @@ public class P_FindHotelRoom_F {
         return String.format("%s:%s", strHour, strMin); // 여기서 주의; 17:0 이런식으로 반환되어서 문제 발생 가능성
     }
 
-    boolean isAvail(Schedule oldData, Schedule newData) {
+    static boolean isAvail(Schedule oldData, Schedule newData) {
         // boolean startTimeAvail = newData.startTime.compareTo(oldData.startTime) < 0;
         // boolean endTimeAvail = newData.endTime.compareTo(oldData.endTime) < 0;
         // return startTimeAvail && endTimeAvail;
