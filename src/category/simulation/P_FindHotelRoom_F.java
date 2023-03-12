@@ -82,7 +82,6 @@ public class P_FindHotelRoom_F {
         return rooms.size();
     }
 
-    // 내림차순 정렬
     void sortByTerms(String[][] book_time) {
         Arrays.sort(book_time, (b1, b2) -> {
             int result = b1[0].compareTo(b2[0]);
