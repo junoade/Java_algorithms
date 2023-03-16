@@ -13,13 +13,13 @@ public class P_MakeStar {
         pointY = new ArrayList<>();
 
         /* step1) 정수인 교점의 집합 구하기 O(N^2) */
-        for(int i = 0; i < line.length; i++) {
-            for(int j = i; j < line.length; j++) {
+        for (int i = 0; i < line.length; i++) {
+            for (int j = i; j < line.length; j++) {
                 double[] point = getPoint(line[i], line[j]);
 
                 /* step2) 정수인 교점만 저장하도록 */
-                if(isInteger(point)) {
-                    long[] temp = Arrays.stream(point).mapToLong(e -> (long)e).toArray();
+                if (isInteger(point)) {
+                    long[] temp = Arrays.stream(point).mapToLong(e -> (long) e).toArray();
                     pointX.add(temp[0]);
                     pointY.add(temp[1]);
                 }
@@ -37,14 +37,14 @@ public class P_MakeStar {
         final int Y = (int) Math.abs(y_max - y_min) + 1;
         String[] answer = new String[Y];
 
-        for(int i = 0; i < Y; i++) {
+        for (int i = 0; i < Y; i++) {
             answer[i] = ".".repeat(X);
         }
 
-        for(int i = 0; i < pointX.size(); i++){
+        for (int i = 0; i < pointX.size(); i++) {
             int newX = (int) Math.abs(pointX.get(i) + x_min * (-1));
             int newY = (int) Math.abs(pointY.get(i) + y_max * (-1));
-            String tempRow = answer[newY] ;
+            String tempRow = answer[newY];
             answer[newY] = replace(tempRow, newX, '*');
         }
 
@@ -57,14 +57,14 @@ public class P_MakeStar {
         double[] result = new double[2];
         long a = l1[0], b = l1[1], e = l1[2];
         long c = l2[0], d = l2[1], f = l2[2];
-        result[0] = (double)(b*f - e*d) / (a*d - b*c);
-        result[1] = (double)(e*c - a*f) / (a*d - b*c);
+        result[0] = (double) (b * f - e * d) / (a * d - b * c);
+        result[1] = (double) (e * c - a * f) / (a * d - b * c);
         return result;
     }
 
     boolean isInteger(double[] point) {
-        for(double p : point) {
-            if((p % 1) != 0.0) { // 정수형인가? 아닌가?
+        for (double p : point) {
+            if ((p % 1) != 0.0) { // 정수형인가? 아닌가?
                 return false;
             }
         }
@@ -76,7 +76,6 @@ public class P_MakeStar {
         arr[idx] = newChar;
         return new String(arr);
     }
-
 
     /* main 메소드 테스트 */
     public static void main(String[] args) {
