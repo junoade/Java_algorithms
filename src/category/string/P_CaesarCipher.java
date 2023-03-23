@@ -2,11 +2,12 @@ package category.string;
 
 public class P_CaesarCipher {
     static final char EMPTY_SPACE = ' ';
+    static final int ALPHABET_LENGTH = 26;
 
     public String solution(String s, int n) {
         StringBuilder answer = new StringBuilder();
-        for(char c : s.toCharArray()) {
-            if(c == EMPTY_SPACE) {
+        for (char c : s.toCharArray()) {
+            if (c == EMPTY_SPACE) {
                 answer.append(EMPTY_SPACE);
                 continue;
             }
@@ -17,21 +18,19 @@ public class P_CaesarCipher {
     }
 
     char moveAlphabet(char c, int n) {
-        final char UPPERCASE_LAST_CHAR = 'Z';
-        final char LOWERCASE_LAST_CHAR = 'z';
+        final char UPPERCASE_FIRST_CHAR = 'A';
+        final char LOWERCASE_FIRST_CHAR = 'a';
 
         int idx = 0;
-        char newChar = (char)(c + n);
-        if(Character.isUpperCase(c) && newChar > UPPERCASE_LAST_CHAR) {
-            idx = newChar - UPPERCASE_LAST_CHAR - 1;
-            newChar = (char)('A' + idx);
-        }
+        char newChar;
 
-        if(Character.isLowerCase(c) && newChar > LOWERCASE_LAST_CHAR) {
-            idx = newChar - LOWERCASE_LAST_CHAR - 1;
-            newChar = (char)('a' + idx);
+        if (Character.isUpperCase(c)) {
+            idx = (c - UPPERCASE_FIRST_CHAR + n) % ALPHABET_LENGTH;
+            newChar = (char) (UPPERCASE_FIRST_CHAR + idx);
+        } else {
+            idx = (c - LOWERCASE_FIRST_CHAR + n) % ALPHABET_LENGTH; // c-'a'의 결과는 int형
+            newChar = (char) (LOWERCASE_FIRST_CHAR + idx);
         }
-
         return newChar;
     }
 
