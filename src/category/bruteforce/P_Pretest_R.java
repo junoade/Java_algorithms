@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class P_Pretest_R {
 
@@ -32,13 +33,14 @@ public class P_Pretest_R {
         }
 
         int[] answer = new int[]{aScore, bScore, cScore};
-        return getMaxArr(answer);
+        return getMaxArrByIntStream(answer);
     }
 
     private int[] getMaxArr(int[] answer) {
         // ArrayList<Integer> maxValue = (ArrayList)Arrays.stream(answer).boxed().collect(Collectors.toList());
         int maxValue = Math.max(answer[0], Math.max(answer[1], answer[2]));
         List<Integer> maxIdxList = new ArrayList<>();
+
         for(int i = 0; i < answer.length; i++) {
             if(answer[i] >= maxValue) {
                 maxValue = answer[i];
@@ -46,7 +48,15 @@ public class P_Pretest_R {
             }
         }
         Collections.sort(maxIdxList);
-        return maxIdxList.stream().mapToInt(c -> c).toArray();
+        return maxIdxList.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private int[] getMaxArrByIntStream(int[] answer) {
+        final int maxValue = Math.max(answer[0], Math.max(answer[1], answer[2]));
+        return IntStream.range(0, answer.length)
+                .filter(i -> answer[i] == maxValue)
+                .map(i -> i + 1)
+                .toArray();
     }
 
     public static void main(String[] args) throws IOException {
