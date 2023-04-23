@@ -1,6 +1,7 @@
 package category.sorting;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * --------------------------------------------------------------<br/>
@@ -13,7 +14,7 @@ import java.util.*;
  * 문제 세부 조건들 주의<br/>
  * --------------------------------------------------------------<br/>
  * <b> 채점 </b><br/>
- * <p> 메모리 90MB , 최대 실행시간 8.97ms <br/>
+ * <p> 메모리 92MB , 최대 실행시간 15.86ms <br/>
  * --------------------------------------------------------------
  */
 public class P_MenuRenewal {
@@ -42,11 +43,12 @@ public class P_MenuRenewal {
             if (max == 1) {
                 continue;
             }
-            for (Map.Entry<String, Integer> entry : map.entrySet()) {
-                if (entry.getValue() == max) {
-                    result.add(entry.getKey());
-                }
-            }
+
+            List<String> temp = map.entrySet().stream()
+                    .filter(entry -> entry.getValue() == max)
+                    .map(Map.Entry::getKey)
+                    .collect(Collectors.toList());
+            result.addAll(temp);
         }
 
         // ArrayList 정렬 후 반환
