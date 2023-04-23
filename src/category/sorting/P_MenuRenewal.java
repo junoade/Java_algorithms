@@ -64,7 +64,6 @@ public class P_MenuRenewal {
         if (depth == sb.length()) {
             // 만약 map에 있는 요소라면
             // value를 update
-            // XY <-> YX 에 대해 XY도 추가, YX도 추가
             String origin = sb.toString();
             char[] temp = origin.toCharArray();
             Arrays.sort(temp);
