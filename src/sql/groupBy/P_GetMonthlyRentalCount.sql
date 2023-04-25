@@ -1,0 +1,23 @@
+-- #1
+-- TO_CHAR 로 그룹핑할 경우
+-- 문자열 '01'를 결과로 얻게 되는데 이러면 1이 아니라 오답
+-- 그렇다고 FM 붙여서 '1'를 얻으면 정렬이 문자열 정렬로 되어서 오답
+-- EXTRACT(MONTH FROM DATE)로 정수값을 얻어오도록 작성
+-- #2
+-- 특정 기간 동안 대여한 횟수가 5회 이상인 CAR_ID 그룹에서
+-- 특정 기간의 월별 대여 횟수를 출력해야했다. (0보다 크게)
+-- 그리고 정렬 기준에 맞춰 정렬
+SELECT EXTRACT(MONTH FROM C.START_DATE) AS MONTH,
+       C.CAR_ID,
+       COUNT(*) AS RECORDS
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY C
+WHERE C.CAR_ID IN (
+    SELECT C2.CAR_ID
+    FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY C2
+    WHERE TO_CHAR(C2.START_DATE, 'YYYY-MM') BETWEEN '2022-08' AND '2022-10'
+    GROUP BY C2.CAR_ID
+    HAVING COUNT(*) >= 5
+    ) AND TO_CHAR(C.START_DATE, 'YYYY-MM') BETWEEN '2022-08' AND '2022-10'
+GROUP BY EXTRACT(MONTH FROM C.START_DATE), C.CAR_ID
+HAVING COUNT(*) > 0
+ORDER BY MONTH, C.CAR_ID DESC;
