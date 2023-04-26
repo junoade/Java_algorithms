@@ -34,21 +34,24 @@ public class P_FunctionDev {
         int count = 0;
 
         while (head < L) {
-            // passedDays 갱신 후 완료된 작업인지 확인
+            // 첫 작업 진척도, 지난 기간, 작업 속도를 바탕으로 현재 누적된 작업 진척도를 구함
             int value = progresses[head] + passedDays * speeds[head];
 
+            // 그 값이 MAX 이상이라면
             if (value >= MAX) {
                 count++;
                 head++;
-            } else {
+            } else { // 그 값이 MAX보다 낮으면 새로운 배포 단위를 생성
                 if (count != 0) {
                     answer.add(count);
                     count = 0;
                 }
+                // 새로운 배포 단위의 기능이 필요로 하는 추가 날짜 계산
                 passedDays += getPassedDays(value, speeds[head]);
             }
         }
-        // 마지막 count 추가
+
+        // 마지막 배포 단위는 위의 루프에서 처리되지 않으므로, 마지막 count 추가
         answer.add(count);
 
         return answer.stream().mapToInt(Integer::intValue).toArray();
