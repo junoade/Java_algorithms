@@ -16,6 +16,7 @@ import java.util.Arrays;
  * --------------------------------------------------------------<br/>
  * <b> 나의 풀이 </b><br/>
  * 어떤 조건를 만족하는 가장 큰 수 개념 학습 및 구현<br/>
+ * 어떤 조건를 만족하는 가장 작은 수 개념 학습 및 구현<br/>
  * --------------------------------------------------------------<br/>
  */
 public class ParametricSearch {
@@ -49,12 +50,46 @@ public class ParametricSearch {
             resultIdx = start; // 결정됨
         }
 
-        System.out.printf("key 값을 갖는 인덱스 : %d, 값 : %d\n", resultIdx, arr[resultIdx]);
+        System.out.printf("조건을 만족하는 최대값을 갖는 인덱스 : %d, 값 : %d\n", resultIdx, arr[resultIdx]);
+    }
+
+    public void searchLowestOver(int[] arr, int key) {
+        Arrays.sort(arr);
+        System.out.println("정렬 후 : " + Arrays.toString(arr));
+
+        int start = 0;
+        int end = arr.length;
+        int resultIdx = -1;
+
+        while(start < end) {
+            int mid = (start + end) / 2;
+            int value = arr[mid];
+
+            if(value < key) { // key가 현재 중앙값보다 클 때 (조건 False)
+                start = mid + 1;
+            } else if(value > key) { // key보다 현재 중앙값이 클 때 (조건 true)
+                // 그러한 true 조건들 중에 작은 값을 찾아야 하므로 범위를 좁혀간다.
+                // 이 때 mid를 포함. 결정 조건을 만족하더라도 더 작은 값이 있을 수 있으므로; 새로운 범위 [start, end]
+                end = mid;
+            } else {
+                resultIdx = mid;
+                break;
+            }
+        }
+
+        if(resultIdx < 0) {
+            // System.out.println(resultIdx);
+            resultIdx = start; // 결정됨
+        }
+        System.out.printf("조건을 만족하는 최솟값을 갖는 인덱스 : %d, 값 : %d\n", resultIdx, arr[resultIdx]);
     }
 
     public static void main(String[] args) {
         ParametricSearch test01 = new ParametricSearch();
         int[] arr = {1, 4, 5129, 12, 1320, 44, 55, 2, 6, 7, 8};
-        test01.searchBiggestOver(arr, 10); // 5129
+        int key = 10;
+        System.out.printf("%d 보다 큰 수 중 최대/최소값을 구하라\n", key);
+        test01.searchBiggestOver(arr, key); // 5129
+        test01.searchLowestOver(arr, key);
     }
 }
