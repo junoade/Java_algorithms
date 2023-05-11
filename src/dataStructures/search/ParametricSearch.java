@@ -85,11 +85,25 @@ public class ParametricSearch {
     }
 
     public static void main(String[] args) {
+        // test01();
+        test02();
+    }
+
+    static void test01() {
         ParametricSearch test01 = new ParametricSearch();
         int[] arr = {1, 4, 5129, 12, 1320, 44, 55, 2, 6, 7, 8};
         int key = 10;
         System.out.printf("%d 보다 큰 수 중 최대/최소값을 구하라\n", key);
         test01.searchBiggestOver(arr, key); // 5129
+        test01.searchLowestOver(arr, key);
+    }
+
+    static void test02() {
+        ParametricSearch test01 = new ParametricSearch();
+        int[] arr = {50, 80, 150, 150, 210, 260};
+        int key = 150;
+        System.out.printf("%d 보다 큰 수 중 최대/최소값을 구하라\n", key);
+        test01.searchBiggestOver(arr, key);
         test01.searchLowestOver(arr, key);
     }
 }
