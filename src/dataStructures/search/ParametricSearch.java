@@ -53,13 +53,13 @@ public class ParametricSearch {
         System.out.printf("조건을 만족하는 최대값을 갖는 인덱스 : %d, 값 : %d\n", resultIdx, arr[resultIdx]);
     }
 
+    // 정수 key 이상인 수 중에 가장 작은 값을 구하는 메소드
     public void searchLowestOver(int[] arr, int key) {
         Arrays.sort(arr);
         System.out.println("정렬 후 : " + Arrays.toString(arr));
 
         int start = 0;
-        int end = arr.length;
-        int resultIdx = -1;
+        int end = arr.length - 1;
 
         while(start < end) {
             int mid = (start + end) / 2;
@@ -67,20 +67,15 @@ public class ParametricSearch {
 
             if(value < key) { // key가 현재 중앙값보다 클 때 (조건 False)
                 start = mid + 1;
-            } else if(value > key) { // key보다 현재 중앙값이 클 때 (조건 true)
+            } else { // key보다 현재 중앙값이 클 때 (조건 true) value >= key;
                 // 그러한 true 조건들 중에 작은 값을 찾아야 하므로 범위를 좁혀간다.
-                // 이 때 mid를 포함. 결정 조건을 만족하더라도 더 작은 값이 있을 수 있으므로; 새로운 범위 [start, end]
+                // 이 때 mid를 포함. 결정 조건을 만족하더라도 더 작은 위치에 있는 값이 있을 수 있으므로;
+                // 새로운 범위 [start, end]
                 end = mid;
-            } else {
-                resultIdx = mid;
-                break;
             }
         }
 
-        if(resultIdx < 0) {
-            // System.out.println(resultIdx);
-            resultIdx = start; // 결정됨
-        }
+        int resultIdx = start;
         System.out.printf("조건을 만족하는 최솟값을 갖는 인덱스 : %d, 값 : %d\n", resultIdx, arr[resultIdx]);
     }
 
