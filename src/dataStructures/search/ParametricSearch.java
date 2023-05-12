@@ -75,12 +75,18 @@ public class ParametricSearch {
         }
 
         int resultIdx = start;
+        // 한번 더 조건 검사 필요
+        if(arr[resultIdx] < key) {
+            resultIdx = -1;
+            System.out.printf("조건을 만족하는 최솟값을 갖는 인덱스 : %d\n", resultIdx);
+            return;
+        }
         System.out.printf("조건을 만족하는 최솟값을 갖는 인덱스 : %d, 값 : %d\n", resultIdx, arr[resultIdx]);
     }
 
     public static void main(String[] args) {
-        // test01();
-        // test02();
+        test01();
+        test02();
         test03();
     }
 
