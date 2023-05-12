@@ -20,36 +20,35 @@ import java.util.Arrays;
  * --------------------------------------------------------------<br/>
  */
 public class ParametricSearch {
-    // 특정 조건보다 가장 큰 수를 찾는 방법 구현
+    // 특정 조건(정수 key 이상인 수)를 만족하는 가장 큰 위치를 찾는 방법 구현
     public void searchBiggestOver(int[] arr, int key) {
         Arrays.sort(arr);
         System.out.println("정렬 후 : " + Arrays.toString(arr));
 
         int start = 0;
         int end = arr.length;
-        int resultIdx = -1;
 
-        while(start < end - 1) { // [start, end)로 해야 무한루프를 돌지 않음
+        while(start < end - 1) { // end - start(원소의 개수) > 1(마지막 요소만 남을 때)까지 반복
             int mid = (start + end) / 2;
             int value = arr[mid];
 
             if(key > value) { // key보다 작은 value (조건을 만족하지 않음)
                 start = mid + 1;
-            } else if(key < value) { // key보다 큰 value (조건 만족, k 이상인 값 True)
+            } else {
+                // key보다 큰 value (조건 만족, k 이상인 값 True); key <= value
                 // mid를 포함하여 좁힌다
                 // 결정 조건을 만족하더라도 더 큰 값이 있을 수 있으므로;
                 start = mid;
-            } else {
-                resultIdx = mid;
-                break;
             }
         }
 
-        if(resultIdx < 0) {
-            System.out.println(resultIdx);
-            resultIdx = start; // 결정됨
+        int resultIdx = start;
+        // 마지막 경우가 [F, F] 라면 해당 조건을 만족하는 수가 없음을 의미
+        if(resultIdx == end) {
+            resultIdx = -1;
+            System.out.printf("조건을 만족하는 최대값을 갖는 인덱스 : %d\n", resultIdx);
+            return;
         }
-
         System.out.printf("조건을 만족하는 최대값을 갖는 인덱스 : %d, 값 : %d\n", resultIdx, arr[resultIdx]);
     }
 
@@ -81,7 +80,8 @@ public class ParametricSearch {
 
     public static void main(String[] args) {
         // test01();
-        test02();
+        // test02();
+        test03();
     }
 
     static void test01() {
@@ -97,6 +97,15 @@ public class ParametricSearch {
         ParametricSearch test01 = new ParametricSearch();
         int[] arr = {50, 80, 150, 150, 210, 260};
         int key = 150;
+        System.out.printf("%d 보다 큰 수 중 최대/최소값을 구하라\n", key);
+        test01.searchBiggestOver(arr, key);
+        test01.searchLowestOver(arr, key);
+    }
+
+    static void test03() {
+        ParametricSearch test01 = new ParametricSearch();
+        int[] arr = {50, 80, 150, 150, 210, 260};
+        int key = 300;
         System.out.printf("%d 보다 큰 수 중 최대/최소값을 구하라\n", key);
         test01.searchBiggestOver(arr, key);
         test01.searchLowestOver(arr, key);
