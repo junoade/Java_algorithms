@@ -13,7 +13,7 @@ import java.util.*;
  * - 왜 이번 코드는 더 오래걸릴까?<br/>
  * --------------------------------------------------------------<br/>
  * <b> 채점 </b><br/>
- * <p> 메모리  / 256MB , 실행시간  17,000ms / 20,000ms<br/>
+ * <p> 메모리  / 256MB , 실행시간  290ms / 20,000ms<br/>
  * --------------------------------------------------------------
  */
 public class SM_MaxReward {
@@ -72,6 +72,9 @@ public class SM_MaxReward {
             String[] inputs = br.readLine().split(" ");
             int[] numbers = Arrays.stream(inputs[0].split("")).mapToInt(Integer::parseInt).toArray();
             int swap = Integer.parseInt(inputs[1]);
+            if (swap > numbers.length) {
+                swap = numbers.length;
+            }
             solution(numbers, swap);
             System.out.printf("#%d %d\n", (i + 1), maxValue);
         }
