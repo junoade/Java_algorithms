@@ -37,7 +37,7 @@ public class B_Director_1436 {
             StringBuilder sb = new StringBuilder(status);
             sb.append("666");
             long temp = Long.parseLong(sb.toString());
-            if (!evils.contains(temp) && evils.size() < N) {
+            if (!evils.contains(temp)) {
                 evils.add(Long.parseLong(sb.toString()));
             }
 
