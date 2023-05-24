@@ -58,7 +58,7 @@ public class P_Parallel {
             int x3 = dot[i3][0], y3 = dot[i3][1];
             int x4 = dot[i4][0], y4 = dot[i4][1];
 
-            if((y1 - y2) / (x1 - x2) == (y3 - y4) / (x3 - x4)) {
+            if((y1 - y2) / (double)(x1 - x2) == (y3 - y4) / (double)(x3 - x4)) {
                 count++;
             }
 
