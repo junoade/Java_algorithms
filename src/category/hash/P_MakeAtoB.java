@@ -10,7 +10,8 @@ import java.util.*;
  * 주어진 문자열의 문자의 위치를 바꿔 after 문자열과 같게 만들 수 있는가 판별<br/>
  * --------------------------------------------------------------<br/>
  * <b> 나의 풀이 </b><br/>
- * 해시맵을 이용해 문자(key) - 그 문자의 갯수(value)의 일치 여부 판단<br/>
+ * 해시맵을 이용해 문자(key) - 그 문자의 갯수(value)의 일치 여부 판단 O(N)<br/>
+ * 정렬을 이용해 문자의 정렬된 상태가 같은지 비교 O(NlogN)
  * --------------------------------------------------------------<br/>
  * <b> 채점 </b><br/>
  * <p> 메모리  / 256MB , 실행시간 2.67ms<br/>
@@ -48,5 +49,18 @@ public class P_MakeAtoB {
         }
 
         return result;
+    }
+
+    public int solution2(String before, String after) {
+        char[] src = before.toCharArray();
+        char[] target = after.toCharArray();
+        Arrays.sort(src);
+        Arrays.sort(target);
+
+        if(String.valueOf(src).equals(String.valueOf(target))) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
