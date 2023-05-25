@@ -2,6 +2,7 @@ package category.hash;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * --------------------------------------------------------------<br/>
@@ -30,5 +31,12 @@ public class P_RemoveDupChars {
         }
 
         return sb.toString();
+    }
+
+    public String solution2(String my_string) {
+        return my_string.chars()
+                .mapToObj(Character::toString)
+                .distinct()
+                .collect(Collectors.joining());
     }
 }
