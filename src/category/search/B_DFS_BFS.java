@@ -14,6 +14,7 @@ public class B_DFS_BFS {
 
     static void dfs(int startKey, StringBuilder sb) {
         visited[startKey] = true;
+        sb.append(startKey).append(" ");
 
         for(int i = 1; i < graph[startKey].length; i++) {
             if(visited[i]) {
@@ -25,7 +26,6 @@ public class B_DFS_BFS {
             }
 
             visited[i] = true;
-            sb.append(i).append(" ");
             dfs(i, sb);
         }
     }
@@ -37,6 +37,7 @@ public class B_DFS_BFS {
 
         while (!queue.isEmpty()) {
             Integer cursor = queue.poll();
+            sb.append(cursor).append(" ");
 
             for(int i = 1; i < graph[cursor].length; i++) {
                 if(visited[i]) {
@@ -48,7 +49,6 @@ public class B_DFS_BFS {
                 }
 
                 visited[i] = true;
-                sb.append(i).append(" ");
                 queue.add(i);
             }
         }
@@ -72,12 +72,12 @@ public class B_DFS_BFS {
         }
 
         visited = new boolean[N + 1]; // 정점은 1부터 N까지
-        StringBuilder result = new StringBuilder(V + " ");
+        StringBuilder result = new StringBuilder();
         dfs(V, result);
         System.out.println(result);
 
         visited = new boolean[N + 1]; // 정점은 1부터 N까지
-        result = new StringBuilder(V + " ");
+        result = new StringBuilder();
         bfs(V, result);
         System.out.println(result);
     }
