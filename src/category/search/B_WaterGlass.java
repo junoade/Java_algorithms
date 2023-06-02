@@ -131,14 +131,14 @@ public class B_WaterGlass {
         int possibleAmount = to.maxWater - to.curWater;
         if(possibleAmount > 0) {
             // 다 주는 경우
-            if(start.curWater < possibleAmount) {
+            if(start.curWater <= possibleAmount) {
                 to.curWater += start.curWater;
                 start.curWater = 0;
             }
             // 일부만 주는 경우
             else {
                 start.curWater -= possibleAmount;
-                to.curWater = possibleAmount;
+                to.curWater += possibleAmount;
             }
         }
     }
