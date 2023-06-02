@@ -26,10 +26,12 @@ import java.util.HashSet;
  */
 public class B_WaterGlass {
 
-    static boolean[][] visited;
     static final int N = 3;
     static Glass[] glasses;
     static HashSet<Integer> set;
+
+    // A의 물의 양 - B의 물의 양
+    static boolean[][] visited;
 
     static class Glass {
         int maxWater;
@@ -49,89 +51,91 @@ public class B_WaterGlass {
     }
 
     static void solution() {
-
-        // 탐색 전에
-        // 방문 처리
-        // A가 비어있는지 확인하고 그렇다면 C의 물의 양을 확인
-        visited[2][glasses[2].curWater] = true;
-        if(glasses[0].curWater == 0) {
-            set.add(glasses[2].curWater);
-        }
-
-        dfs(2);
+        updateGlassStatusIfPossible();
+        dfs();
 
         Integer[] arr = set.toArray(Integer[]::new);
         Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr));
-
+        for (Integer num : arr) {
+            System.out.print(num + " ");
+        }
     }
 
-    static void dfs(int startIdx) {
-        Glass start = glasses[startIdx];
-        final int START_WATER = start.curWater;
+    static void dfs() {
+        // 6가지 경우의 수에 대해 확인
+        for (int startIdx = N - 1; startIdx >= 0; startIdx--) {
+            Glass start = glasses[startIdx];
+            final int START_WATER = start.curWater;
 
-        // 다음 물 확인해주기
-        for(int toIdx = 0; toIdx < N; toIdx++) {
-            if(toIdx != startIdx) {
+            if (!isAbleToGiveWater(start)) {
+                continue;
+            }
+
+            // 다음 물통 확인해주기
+            for (int toIdx = 0; toIdx < N; toIdx++) {
+                if (startIdx == toIdx) {
+                    continue;
+                }
+
                 Glass to = glasses[toIdx];
                 final int TO_WATER = to.curWater;
 
                 // 물을 줄 수 있나?
-                if(!isAbleToGiveWater(start, to)) {
-                    System.out.println("[CONTINUE] 물 줄 수 없음");
+                if (!isAbleToGiveWater(start, to)) {
                     continue;
                 }
 
-                // 남은 물의 양에 대해 visited check
-                if(visited[startIdx][start.curWater] && visited[toIdx][to.curWater]) {
-                    System.out.println("[CONTINUE] 방문한 적 있는 물의 양\n");
+                // 현재 A, B에 남은 물의 양에 대해 visited check
+                final int A1 = glasses[0].curWater, B1 = glasses[1].curWater;
+                if (visited[A1][B1]) {
                     continue;
                 }
+                visited[A1][B1] = true;
 
-                // 물을 주고 나서
-                System.out.printf("건내기 전 - start : %s, to : %s, mid : %s\n", start, to, findAnother(start, to));
+                // 물을 준다
                 giveWater(start, to);
-                visited[startIdx][start.curWater] = true;
-                visited[toIdx][to.curWater] = true;
-                System.out.printf("건내고 난 후 - start : %s, to : %s, mid : %s\n", start, to, findAnother(start, to));
 
+                // A가 비어있는 지 확인, 그렇다면 C의 물의 양을 확인
+                updateGlassStatusIfPossible();
 
-                // A가 비어있는 지 확인
-                // 그렇다면 C의 물의 양을 확인
-                if(glasses[0].curWater == 0) {
-                    set.add(glasses[2].curWater);
-                }
+                // 바뀐 상태에 대해 모든 경우의 수에 대해 탐색하도록 다음 재귀 호출
+                dfs();
 
-                // 다음 재귀
-                System.out.println("다음 재귀 호출\n");
-                dfs(toIdx);
-
-                // 다녀와서 curWater 복구해줌
-                System.out.println("상태 초기화");
-                // 방문 하고나서 상태
-                visited[startIdx][start.curWater] = false;
-                visited[toIdx][to.curWater] = false;
+                // 상태 변화가 생긴 객체들에 대해
+                // 방문 전 상태로 원복
+                visited[A1][B1] = false;
                 start.curWater = START_WATER;
                 to.curWater = TO_WATER;
-                // 방문 전 상태
-
-
             }
-
         }
     }
 
-    static boolean isAbleToGiveWater(Glass start, Glass to) {
-        int possibleAmount = to.maxWater - to.curWater;
-        return possibleAmount > 0 && start.curWater > 0;
+    // A가 비어있는 지 확인
+    // 그렇다면 C의 물의 양을 확인
+    static void updateGlassStatusIfPossible() {
+        if (glasses[0].curWater == 0) {
+            set.add(glasses[2].curWater);
+        }
     }
 
+    // 현재 물통이 물을 줄 수 있나
+    static boolean isAbleToGiveWater(Glass start) {
+        return start.curWater > 0;
+    }
+
+    // 현재 물통이 다른 물통에 물을 줄 수 있나
+    static boolean isAbleToGiveWater(Glass start, Glass to) {
+        int possibleAmount = to.maxWater - to.curWater;
+        return possibleAmount > 0 && isAbleToGiveWater(start);
+    }
+
+    // 물 건내기 로직
     static void giveWater(Glass start, Glass to) {
         // 전달하려는 물의 양이 받는 병의 maxWater 보다 크면
         int possibleAmount = to.maxWater - to.curWater;
-        if(possibleAmount > 0) {
+        if (possibleAmount > 0) {
             // 다 주는 경우
-            if(start.curWater <= possibleAmount) {
+            if (start.curWater <= possibleAmount) {
                 to.curWater += start.curWater;
                 start.curWater = 0;
             }
@@ -141,17 +145,6 @@ public class B_WaterGlass {
                 to.curWater += possibleAmount;
             }
         }
-    }
-
-    static Glass findAnother(Glass start, Glass to) {
-        Glass mid = null;
-        for(Glass glass : glasses) {
-            if (glass == start || glass == to) {
-                continue;
-            }
-            mid = glass;
-        }
-        return mid;
     }
 
     public static void main(String[] args) throws IOException {
@@ -164,14 +157,8 @@ public class B_WaterGlass {
         glasses[1] = new Glass(B, 0, "B");
         glasses[2] = new Glass(C, C, "C");
 
-
-        // 각자 남은 리터별로 방문 여부 확인하기
-        // 1부터 시작
-        visited = new boolean[3][];
-        visited[0] = new boolean[A + 1];
-        visited[1] = new boolean[B + 1];
-        visited[2] = new boolean[C + 1];
-
+        // 현재 A, B의 물의 양을 기준으로 visited check
+        visited = new boolean[A + 1][B + 1];
 
         set = new HashSet<>();
 
