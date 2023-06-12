@@ -1,4 +1,4 @@
-package category.binarySearch;
+package category.binarySearch.failed;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ import java.util.Arrays;
  * <b> 채점 30.4 / 100</b><br/>
  * --------------------------------------------------------------
  */
-public class P_FindFromBehind {
+public class P_FindFromBehind_Failed {
     public int[] solution(int[] numbers) {
         final int L = numbers.length;
         int[] answer = new int[L];
@@ -39,42 +39,41 @@ public class P_FindFromBehind {
             return -1;
         }
 
-        // base case #2 : 1개만 남았을 때
-        if (start == to) {
-            return isValid(key, numbers[start]) ? numbers[start] : -1;
-        }
-
         // base case #3 : 2개만 남았을 때
         // 조건을 만족하는 min을 반환
         if (to - start == 1) {
             int lastLeft = numbers[start];
             int lastRight = numbers[to];
-            if(!isValid(key, lastLeft) && !isValid(key, lastRight)) {
-                return -1;
-            }
-
-            if(isValid(key, lastLeft)) {
+            if(!isValid(key, lastLeft)) {
+                if(!isValid(key, lastRight)) {
+                    return -1;
+                } else {
+                    return lastRight;
+                }
+            } else {
                 return lastLeft;
             }
-
-            if(isValid(key, lastRight)) {
-                return lastRight;
-            }
         }
+
+        // base case #2 : 1개만 남았을 때
+        if (start == to) {
+            return isValid(key, numbers[start]) ? numbers[start] : -1;
+        }
+
 
         // general case
-        int target1 = 0, target2 = 0;
         int mid = (start + to) / 2 ;
         boolean cond = isValid(key, numbers[mid]);
-        target1 = binarySearch(numbers, key, start, mid);
-        target2 = binarySearch(numbers, key, mid, to);
-        if(target1 == -1 && target2 == -1) {
-            return -1;
+        if(cond) {
+            return binarySearch(numbers, key, start, mid);
+        } else {
+            // start가 true?
+            if(isValid(key, numbers[start])) {
+                return numbers[start];
+            }
+            return binarySearch(numbers, key, start + 1, to);
         }
-        if(target1 != -1) {
-            return target1;
-        }
-        return target2;
+
     }
 
     boolean isValid(int n1, int n2) {
@@ -82,7 +81,7 @@ public class P_FindFromBehind {
     }
 
     public static void main(String[] args) {
-        P_FindFromBehind test = new P_FindFromBehind();
+        P_FindFromBehind_Failed test = new P_FindFromBehind_Failed();
         int[] arr1 = new int[]{2, 3, 3, 5};
         int[] arr2 = new int[]{9, 1, 5, 3, 6, 2};
         int[] arr3 = new int[]{2, 1, 3, 1, 4, 5, 6};
