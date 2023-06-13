@@ -46,8 +46,7 @@ public class B_SeperateDistrict_2667 {
                 }
 
                 // 새로운 집인지 확인 (새로운 방문 지역이면 탐색 완료하고 방문 개수 반환)
-                visited[x][y] = true;
-                COUNT = 1;
+                COUNT = 0;
                 dfs(x, y);
                 if (COUNT > 0) {
                     list.add(COUNT);
@@ -62,10 +61,11 @@ public class B_SeperateDistrict_2667 {
         }
     }
 
+    // 방문한 가능한 상태에서 호출하게 됨
     static void dfs(int x, int y) {
-        // 방문 여부 확인
-        // if (visited[x][y]) {return;}
-        // visited[x][y] = true;
+        // 방문
+        visited[x][y] = true;
+        COUNT++;
 
         // 1인지 확인
         // 새로운 집인지 확인
@@ -78,16 +78,10 @@ public class B_SeperateDistrict_2667 {
                 continue;
             }
 
-            if (visited[nx][ny]) {
+            if (graph[nx][ny] == 0 || visited[nx][ny]) {
                 continue;
             }
 
-            if (graph[nx][ny] == 0) {
-                continue;
-            }
-
-            visited[nx][ny] = true;
-            COUNT++;
             dfs(nx, ny);
         }
     }
