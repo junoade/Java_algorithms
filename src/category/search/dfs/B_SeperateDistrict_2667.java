@@ -1,4 +1,4 @@
-package category.search;
+package category.search.dfs;
 
 import java.io.*;
 import java.util.ArrayList;

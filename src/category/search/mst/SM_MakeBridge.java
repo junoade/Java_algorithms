@@ -1,4 +1,4 @@
-package category.search;
+package category.search.mst;
 
 import java.io.BufferedReader;
 import java.io.IOException;

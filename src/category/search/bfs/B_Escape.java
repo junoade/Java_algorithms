@@ -1,4 +1,4 @@
-package category.search;
+package category.search.bfs;
 
 import java.io.*;
 import java.util.Arrays;
