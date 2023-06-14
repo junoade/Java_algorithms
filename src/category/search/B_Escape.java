@@ -37,28 +37,28 @@ public class B_Escape {
     static void solution() {
         // 1. 초기 상태에 대한 큐 생성
         // 초기 물의 위치 먼저 넣고, 고슴도치 위치를 마지막에 넣어줌
+        // 미리 방문 체크 해줘야 한다.
+        // 1) 먼저 고슴도치를 수장시켜버리면 안됨
+        // 2) 다음 번 침수 가능 지역을 고슴도치가 먼저 확인할 필요가 있음
         Queue<Node> queue = scanAndInit();
         queue.add(start);
 
         // 2. BFS 탐색 준비
         // 고슴도치가 이동할 때가 되면 이미 1분에 대해 물들이 이동완료된 상태
+        boolean isPossible = false;
         while (!queue.isEmpty()) {
             // 물이 움직이는지
             // 고슴도치가 움직이는 지 구분
             Node target = queue.poll();
 
-            // 고슴도치 또는 물이 end에 도착한 경우
+            // 고슴도치가 end에 도착한 경우
             boolean sthArrived = target.x == end.x && target.y == end.y;
             if (sthArrived && !target.isWater) {
-                if (target.isWater) {
-                    System.out.println("KAKTUS");
-                } else {
-                    System.out.println(dist[end.x][end.y]);
-                }
+                isPossible = true;
                 break;
             }
 
-            visited[target.x][target.y] = true;
+            // visited[target.x][target.y] = true;
 
             // 먼저 1분간 고슴도치 또는 물이 움직일 건데
             for (int d = 0; d < dx.length; d++) {
@@ -70,6 +70,11 @@ public class B_Escape {
                     continue;
                 }
 
+                // 물은 비버굴을 지날 수 없다
+                if(target.isWater && graphs[nx][ny] == 'D') {
+                    continue;
+                }
+
                 boolean status = true;
                 if (!target.isWater) {
                     // 현재 대상이 고슴도치이고 이동 가능한 경우
@@ -77,8 +82,15 @@ public class B_Escape {
                     dist[nx][ny] = dist[target.x][target.y] + 1;
                     status = false;
                 }
+                visited[nx][ny] = true;
                 queue.add(new Node(nx, ny, status));
             }
+        }
+
+        if(isPossible) {
+            System.out.println(dist[end.x][end.y]);
+        } else {
+            System.out.println("KAKTUS");
         }
     }
 
@@ -90,10 +102,12 @@ public class B_Escape {
                 char symbol = graphs[i][j];
                 if (symbol == 'S') {
                     start = new Node(i, j, false);
+                    visited[i][j] = true;
                 } else if (symbol == 'D') {
                     end = new Node(i, j, false);
                 } else if (symbol == '*') {
                     init.offer(new Node(i, j, true));
+                    visited[i][j] = true;
                 } else {
                     // nothing
                 }
