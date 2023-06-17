@@ -48,7 +48,5 @@ public class B_CountZeroFromBehindOfFactorial {
         tables = new BigInteger[SIZE + 1];
         initFactorialTables();
         solution(N);
-
-
     }
 }
