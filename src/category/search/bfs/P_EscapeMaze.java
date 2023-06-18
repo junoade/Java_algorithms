@@ -23,7 +23,7 @@ public class P_EscapeMaze {
     }
 
     static Node[][] graphs;
-    static boolean[][] visited;
+    // static boolean[][] visited;
     static int[][] dist;
 
     // u - r - l - d
@@ -38,7 +38,7 @@ public class P_EscapeMaze {
         N = maps.length;
         M = maps[0].length();
         graphs = new Node[N][M];
-        visited = new boolean[N][M];
+        // visited = new boolean[N][M];
         dist = new int[N][M];
 
         Node start = new Node('S', -1, -1, false);
@@ -70,7 +70,6 @@ public class P_EscapeMaze {
 
             // 레버를 당기고 나서 End 위치에 왔는지 여부 확인
             if (node.hasVisitedLever && node.key == 'E') {
-                System.out.println(Arrays.deepToString(dist));
                 return dist[node.x][node.y];
             }
 
@@ -84,25 +83,26 @@ public class P_EscapeMaze {
                 }
 
                 Node next = graphs[nx][ny];
-                if(node.hasVisitedLever && next.hasVisitedLever) {
+                if (node.hasVisitedLever && next.hasVisitedLever) {
                     continue;
                 }
 
                 // 레버를 당긴 상태에서
                 // 거리를 갱신
                 if (node.hasVisitedLever) {
-                    // 이전 비용과 비교
-                    // int previous = dist[nx][ny];
-                    // int current = dist[node.x][node.y] + 1;
-                    // dist[nx][ny] = Math.min(previous, current);
                     dist[nx][ny] = dist[node.x][node.y] + 1;
                     next.hasVisitedLever = true;
+                    queue.offer(next);
                 }
                 // 레버를 안 당겼을 때
                 else {
-                    dist[nx][ny] = dist[node.x][node.y] + 1;
+                    // 레버를 당기지 않았고, 아직 방문하지 않은 경우에만
+                    // 갱신하고 노드를 추가하도록
+                    if (dist[nx][ny] == 0) {
+                        dist[nx][ny] = dist[node.x][node.y] + 1;
+                        queue.offer(next);
+                    }
                 }
-                queue.offer(next);
             }
         }
         return -1;
