@@ -61,7 +61,7 @@ public class P_EscapeMaze {
         while (!queue.isEmpty()) {
             Node node = queue.poll();
 
-            // Lever 위치 여부 확인
+            // Lever 위치 여부 확인 후 새로운 BFS 수행
             if (!node.hasVisitedLever && node.key == 'L') {
                 node.hasVisitedLever = true;
                 queue.clear();
@@ -83,25 +83,19 @@ public class P_EscapeMaze {
                 }
 
                 Node next = graphs[nx][ny];
-                if (node.hasVisitedLever && next.hasVisitedLever) {
-                    continue;
-                }
 
-                // 레버를 당긴 상태에서
-                // 거리를 갱신
-                if (node.hasVisitedLever) {
+                // 레버를 당긴 상태에서 아직 안 당겼던 이전 상태들을 갱신해간다.
+                if (node.hasVisitedLever && !next.hasVisitedLever) {
                     dist[nx][ny] = dist[node.x][node.y] + 1;
                     next.hasVisitedLever = true;
                     queue.offer(next);
                 }
-                // 레버를 안 당겼을 때
-                else {
-                    // 레버를 당기지 않았고, 아직 방문하지 않은 경우에만
-                    // 갱신하고 노드를 추가하도록
-                    if (dist[nx][ny] == 0) {
-                        dist[nx][ny] = dist[node.x][node.y] + 1;
-                        queue.offer(next);
-                    }
+
+                // 레버를 안 당겼고, 아직 최단 거리 값을 메기지 않았을 때(unvisited)
+                // 이미 최단 거리를 배정한 정점이라면 queue에 추가하지 않도록 한다. (Heap메모리 터지는 원인)
+                if (!node.hasVisitedLever && dist[node.x][node.y] == 0) {
+                    dist[nx][ny] = dist[node.x][node.y] + 1;
+                    queue.offer(next);
                 }
             }
         }
