@@ -8,7 +8,6 @@ public class SM_CheeseThief_7733 {
     // 기록
     static int N;
     static int[][] graphs;
-    static Map<Integer, List<int[]>> map;
     static int max;
 
     // 상 - 하 - 좌 - 우
@@ -16,19 +15,20 @@ public class SM_CheeseThief_7733 {
     static final int[] dy = {0, 0, -1, 1};
 
     static int solution() {
-        List<Integer> keys = new ArrayList<>(map.keySet());
-        keys.sort(Comparator.naturalOrder());
         max = Integer.MIN_VALUE;
 
-        for (int key : keys) {
-            // key와 동일한 값을 갖는 위치에 대해 0로 변환
-            update(key);
-            // dfs 탐색 수행하여 치즈 덩어리 갯수 반환
+        for (int day = 0; day < 100; day++) {
             boolean[][] visited = new boolean[N][N];
+
+            // dfs 탐색 수행하여 치즈 덩어리 갯수 반환
             int count = 0;
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
-                    count += dfs(i, j, visited);
+                    if (graphs[i][j] <= day || visited[i][j]) {
+                        continue;
+                    }
+                    count++;
+                    dfs(i, j, visited, day);
                 }
             }
             max = Math.max(max, count);
@@ -37,37 +37,20 @@ public class SM_CheeseThief_7733 {
         return max;
     }
 
-    static void update(int key) {
-        for (int[] pos : map.get(key)) {
-            int x = pos[0], y = pos[1];
-            graphs[x][y] = 0;
-        }
-    }
-
-    static int dfs(int x, int y, boolean[][] visited) {
-        if(visited[x][y] || graphs[x][y] == 0) {
-            return 0;
-        }
-
+    // 미리 먹고 해당 메소드를 호출하게 됨;
+    // count = 1일 때 먹을 수 있는 만큼 탐색(상태 변경) 후 종료
+    static void dfs(int x, int y, boolean[][] visited, int day) {
         visited[x][y] = true;
-        int count = 0;
+
         for (int d = 0; d < dx.length; d++) {
             int nx = x + dx[d];
             int ny = y + dy[d];
 
-            if (isOutbound(nx, ny) || visited[nx][ny] || graphs[nx][ny] == 0) {
-                count++;
+            if (isOutbound(nx, ny) || graphs[nx][ny] <= day || visited[nx][ny]) {
                 continue;
             }
 
-            dfs(nx, ny, visited);
-        }
-
-        // 더 갈 경로가 없으면 1 반환
-        if (count > 0) {
-            return 1;
-        } else {
-            return 0;
+            dfs(nx, ny, visited, day);
         }
     }
 
@@ -76,7 +59,7 @@ public class SM_CheeseThief_7733 {
     }
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("res/2307/0712-02-input.txt"));
+        //System.setIn(new FileInputStream("res/2307/0712-02-input.txt"));
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
@@ -87,7 +70,6 @@ public class SM_CheeseThief_7733 {
         for (int tc = 1; tc <= T; tc++) {
             N = Integer.parseInt(br.readLine());
             graphs = new int[N][N];
-            map = new HashMap<>();
 
             // 입력 처리
             for (int i = 0; i < N; i++) {
@@ -96,18 +78,6 @@ public class SM_CheeseThief_7733 {
                 while (st.hasMoreTokens()) {
                     int value = Integer.parseInt(st.nextToken());
                     graphs[i][j] = value;
-
-                    // 기록용
-                    List<int[]> adjList;
-                    int[] inputs = {i, j};
-                    if (map.containsKey(value)) {
-                        adjList = map.get(value);
-                    } else {
-                        adjList = new ArrayList<>();
-                    }
-                    adjList.add(inputs);
-                    map.put(value, adjList);
-
                     j++;
                 }
 
