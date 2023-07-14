@@ -85,5 +85,6 @@ public class SM_CheeseThief_7733 {
             sb.append("#").append(tc).append(" ").append(solution()).append("\n");
         }
         System.out.print(sb);
+        br.close();
     }
 }
