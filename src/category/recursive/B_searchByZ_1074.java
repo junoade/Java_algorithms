@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 public class B_searchByZ_1074 {
+    // 2^N; * 2^N;
     static int N, X, Y;
 
     // 기록용
@@ -14,15 +15,16 @@ public class B_searchByZ_1074 {
     static int[] dy = {1, -1, 1};
 
     static void solution() {
-        rec(0, 0, (int) Math.pow(2, N));
+        int L = (int) Math.pow(2, N);
+        rec(0, 0, L);
         System.out.println(count);
     }
 
 
-    static boolean rec(int x, int y, int L) {
+    static void rec(int x, int y, int L) {
         // base case #1
         if (x == X && y == Y) {
-            return true;
+            return;
         }
 
         // base case #2
@@ -38,31 +40,37 @@ public class B_searchByZ_1074 {
                 // 범위를 벗어나지 않도록 설계했음
                 count++;
                 if (nx == X && ny == Y) {
-                    return true;
+                    break;
                 }
             }
-            return false;
+            return;
         }
 
         // general case
-        // (0,0)
-        // (0, 0 + L/2)
-        // (0+ L/2, 0)
-        // (0+L/2, 0+L/2)
-        if (rec(x, y, L / 2)) {
-            return true;
-        }
-        count++;
-        if (rec(x, y + L / 2, L / 2)) {
-            return true;
-        }
-        count++;
-        if (rec(x + L / 2, y, L / 2)) {
-            return true;
-        }
-        count++;
+        // 사분면 결정 (재귀)
+        // 건너뛰는 사분면의 count 계산
+        // 찾을 때 까지, L==2 일 때 까지
 
-        return rec(x + L / 2, y + L / 2, L / 2);
+        if(X < x + L/2 && Y < y + L/2) {
+            rec(x, y, L / 2);
+            return;
+        }
+
+        count += L * L / 4;
+        if (X < x + L / 2 && Y >= y + L / 2) {
+            rec(x, y + L / 2, L / 2);
+            return;
+        }
+
+        count += L * L /4;
+        if (X >= x + L / 2 && Y < y + L / 2) {
+            rec(x + L / 2, y, L / 2);
+            return;
+        }
+
+        count += L * L /4;
+        rec(x + L / 2, y + L / 2, L / 2);
+
     }
 
     public static void main(String[] args) throws IOException {
