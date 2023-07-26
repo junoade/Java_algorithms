@@ -7,42 +7,25 @@ public class BOJ_2579_ClimbStairs {
     static int N;
 
     static void solution(int[] climbs) {
-        int[] dp = new int[N + 1];
+        // 0번쨰 행 : c[i-1] 밟고 올라온 경우
+        // 1번째 행 : c[i-1] 밟지 않고 올라온 경우
+        int[][] dp = new int[2][N+1];
 
         // 초기값
-        int count = 0;
-        dp[1] = climbs[1];
-        count++;
+        dp[1][1] = climbs[1];
 
         for(int i = 2; i <= N; i++) {
-            int upOnce = dp[i-1] + climbs[i];
-            int upTwice = dp[i-2] + climbs[i];
+            // c[i-1] 밟고 올라온 경우부터 계산
+            // c[i-1]은 c[i-2] 가 아닌 c[i-3]에서 올라와야함
+            dp[0][i] = dp[1][i-1] + climbs[i];
 
-            if(upOnce > upTwice) {
-                if(count % 2 != 0) {
-                    count++;
-                    dp[i] = upOnce;
-                    continue;
-                }
-            }
-
-            count = 1;
-            dp[i] = upTwice;
-            /*if(count % 3 != 0) {
-                if(upOnce > upTwice) {
-                    count++;
-                    dp[i] = upOnce;
-                } else {
-                    count = 1;
-                    dp[i] = upTwice;
-                }
-            } else {
-                count = 1;
-                dp[i] = upTwice;
-            }*/
+            // c[i-1] 밟지 않고 올라온 경우 계산
+            // c[i-2]에서 바로 올라옴
+            // c[i-3]를 밟고 온 경우(dp[0][i-2]) 아닌 경우 (dp[1][i-2]) 따짐
+            dp[1][i] = Math.max(dp[0][i-2], dp[1][i-2]) + climbs[i];
         }
 
-        System.out.println(dp[N]);
+        System.out.println(Math.max(dp[0][N], dp[1][N]));
     }
 
     public static void main(String[] args) throws IOException {
