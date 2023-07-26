@@ -13,8 +13,12 @@ public class BOJ_2579_ClimbStairs {
 
         // 초기값
         dp[1][1] = climbs[1];
+        if(N >= 2) {
+            dp[0][2] = dp[1][1] + climbs[2];
+            dp[1][2] = climbs[2];
+        }
 
-        for(int i = 2; i <= N; i++) {
+        for(int i = 3; i <= N; i++) {
             // c[i-1] 밟고 올라온 경우부터 계산
             // c[i-1]은 c[i-2] 가 아닌 c[i-3]에서 올라와야함
             dp[0][i] = dp[1][i-1] + climbs[i];
