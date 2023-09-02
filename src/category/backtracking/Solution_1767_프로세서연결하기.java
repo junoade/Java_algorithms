@@ -45,11 +45,11 @@ public class Solution_1767_프로세서연결하기 {
         int[] pos = cores.get(depth);
         final int x = pos[0], y = pos[1];
 
-        int flag = 0;
         // int[][] copiedMaps = getCopy(maps);
         for (int d = 0; d < dx.length; d++) {
+            // 선택할 수 없는 경우에 대해선 depth + 1 해준다
             if (!hasEmptyLine(pos[0], pos[1], d, maps)) {
-                flag++;
+                dfs(maps, cores, depth + 1, coreCnt, wireCnt);
                 continue;
             }
 
@@ -75,15 +75,8 @@ public class Solution_1767_프로세서연결하기 {
                 maps[nx][ny] = 0;
             }
 
-            dfs(maps, cores, depth + 1, coreCnt, wireCnt);
+            // ~~해당 depth 선택 안하는 경우도 확인~~
         }
-
-        if (flag == dx.length) {
-            // display(maps, cores);
-            dfs(maps, cores, depth + 1, coreCnt, wireCnt);
-            // display(maps, cores);
-        }
-
     }
 
     static boolean hasEmptyLine(int x, int y, int d, int[][] maps) {
