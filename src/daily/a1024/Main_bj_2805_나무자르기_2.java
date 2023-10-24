@@ -1,16 +1,18 @@
 package daily.a1024;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
-public class Main_bj_2805_나무자르기 {
+public class Main_bj_2805_나무자르기_2 {
 
     static int N, M;
 
     static int[] arr; // 나무 높이 저장
 
     // H의 최소 범위, 최대 범위로 조정해간다
-    static final int START = 0;
+    static final int START = 1;
     static final int END = 1_000_000_000;
 
     // 유효한 나무들 일단 정렬
@@ -23,47 +25,8 @@ public class Main_bj_2805_나무자르기 {
         System.out.println(iter_search(START, END));
     }
 
-    static int search(int from, int to) {
-        // base case
-        // T F ?
-        if (from == to) {
-            return from;
-        }
-        // base case
-        // T T ? -> T T
-        if (from + 1 == to) {
-            // to에 대해 조건 확인해 보고
-            // 조건에 대해 F면 from을 반환
-            // 조건에 대해 T면 to를 반환
-            int idx = tree_binarySearch(to);
-            long count = getCount(to, idx);
-            if (count < M) {
-                return from;
-            } else {
-                return to;
-            }
-        }
-
-        int h = (from + to) / 2;
-        int idx = tree_binarySearch(h);
-        long count = getCount(h, idx);
-
-        // 조건(M)보다 적은 나무 길이를 얻는 경우
-        // 조건 불만족
-        // h를 줄이도록 작은 범위에 대해 탐색한다
-        if (count < M) {
-            return search(from, h - 1);
-        }
-        // M보다 크거나 같은 나무 길이를 얻는 경우
-        // h를 최대한 높이도록 더 큰 범위에 대해 탐색한다.
-        else {
-            return search(h, to);
-        }
-
-    }
-
     static int iter_search(int from, int to) {
-        while (from < to) {
+        while (from <= to) {
             int h = (from + to) / 2;
             int idx = tree_binarySearch(h);
             long count = getCount(h, idx);
@@ -76,25 +39,11 @@ public class Main_bj_2805_나무자르기 {
             // M보다 크거나 같은 나무 길이를 얻는 경우
             // h를 최대한 높이도록 더 큰 범위에 대해 탐색한다.
             else {
-                from = h;
-            }
-
-            // term : {T, T} or {T, F} 검사
-            if (from + 1 == to) {
-                // to에 대해 조건 확인해 보고
-                // 조건에 대해 F면 from을 반환
-                // 조건에 대해 T면 to를 반환
-                int idx2 = tree_binarySearch(to);
-                long count2 = getCount(to, idx2);
-                if (count2 < M) {
-                    return from;
-                } else {
-                    return to;
-                }
+                from = h + 1;
             }
         }
 
-        return from;
+        return to;
     }
 
     static int tree_binarySearch(int h) {
@@ -136,14 +85,8 @@ public class Main_bj_2805_나무자르기 {
         return sum;
     }
 
-    // mid에 대해
-    /*static boolean checkCondition(int from, int to) {
-
-    }*/
-
     public static void main(String[] args) throws Exception {
         // int T = 4;
-
         // System.setIn(new FileInputStream("src/daily/a1024/input_2805_ex0" + tc + ".txt"));
         // System.setIn(new FileInputStream("src/daily/a1024/input_2805_ex04.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -159,7 +102,6 @@ public class Main_bj_2805_나무자르기 {
 
         solution();
         br.close();
-
     }
 
 }
