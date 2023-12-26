@@ -29,7 +29,7 @@ public class Main_bj_9251_LCS {
                     continue;
                 }
 
-                D[i][j] = Math.max(D[i-1][j], D[i][j-1]);
+                D[i][j] = Math.max(D[i - 1][j], D[i][j - 1]);
             }
         }
 
