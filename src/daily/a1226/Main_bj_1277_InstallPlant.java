@@ -75,9 +75,11 @@ public class Main_bj_1277_InstallPlant {
                     continue;
                 }
 
-                // 이미 연결되었던 곳은 단순 상태 전이만 하도록 pq에 삽입
+                // [오답] 이미 연결되었던 곳은 단순 상태 전이만 하도록 pq에 삽입
+                // [정답] 파괴되지 않은 간선을 갖고 있는 정점이더라도 min(dist[j], minCost]) 비교를 통해 전체적인 최소값을 도출해야한다.
                 if (graph[minVertex][j]) {
-                    pq.offer(new State(vertices[j], minCost + 0));
+                    dist[j] = Math.min(dist[j], minCost);
+                    pq.offer(new State(vertices[j],  dist[j]));
                     continue;
                 }
 
@@ -97,22 +99,6 @@ public class Main_bj_1277_InstallPlant {
     static double getDistance(Vertex v1, Vertex v2) {
         return Math.sqrt(Math.pow(v1.x - v2.x, 2) + Math.pow(v1.y - v2.y, 2));
     }
-
-
-    // 필요없네..
-    /*static void init(double[] dist, boolean[] v, int key) {
-        if (v[key]) {
-            return;
-        }
-        dist[key] = 0.0;
-        v[key] = true;
-
-        for (int j = 1; j <= N; j++) {
-            if (graph[key][j]) {
-                init(dist, v, j);
-            }
-        }
-    }*/
 
     public static void main(String[] args) throws Exception {
         System.setIn(new FileInputStream("src/daily/a1226/case3.txt"));
