@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main_boj_2470 {
 
@@ -18,9 +19,15 @@ public class Main_boj_2470 {
             arr[i] = Integer.parseInt(temp[i]);
         }*/
         // step2
-        int[] arr = Arrays.stream(br.readLine().split(" "))
+        /*int[] arr = Arrays.stream(br.readLine().split(" "))
                 .mapToInt(Integer::parseInt)
-                .toArray();
+                .toArray();*/
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
 
         solution(arr);
     }
@@ -28,24 +35,21 @@ public class Main_boj_2470 {
     static void solution(int[] arr) {
         Arrays.sort(arr);
         int i = 0, j = arr.length - 1;
-        int minSum = Integer.MAX_VALUE;
-        int[] minArr = new int[2];
+        int bestGap = Integer.MAX_VALUE;
+        int[] answer = new int[2];
 
 
         while (i < j) {
             int sum = arr[i] + arr[j];
             int gap = Math.abs(sum);
-            if (gap == 0) {
-                // 종료
-                minArr[0] = arr[i];
-                minArr[1] = arr[j];
-                break;
-            }
 
-            if (gap < minSum) {
-                minSum = gap;
-                minArr[0] = arr[i];
-                minArr[1] = arr[j];
+            if (gap < bestGap) {
+                bestGap = gap;
+                answer[0] = arr[i];
+                answer[1] = arr[j];
+            }
+            if (bestGap == 0) {
+                break;
             }
 
             // 양수
@@ -56,6 +60,6 @@ public class Main_boj_2470 {
             }
         }
 
-        System.out.printf("%d %d\n", minArr[0], minArr[1]);
+        System.out.printf("%d %d%n", answer[0], answer[1]);
     }
 }
