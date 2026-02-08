@@ -14,14 +14,10 @@ public class BOJ_Palindrome_1254 {
     private static int solution(String input) {
         int N = input.length();
         int answer = input.length();
-
-        // s[l, r] 범위의 문자열이 palindrome 인지 확인
-        // 아니면 증가
-        // palindrome이 되면 break
+        char[] arr = input.toCharArray();
 
         for(int i = 0; i < N; i++) {
-            String sub = input.substring(i, N);
-            if(isPalindrome(sub)) {
+            if(isPalindrome(arr, i, N-1)) {
                 break;
             } else {
                 answer++;
@@ -30,11 +26,12 @@ public class BOJ_Palindrome_1254 {
         return answer;
     }
 
-    private static boolean isPalindrome(String input) {
-        int l = 0, r = input.length() - 1;
-        char[] chars = input.toCharArray();
+    private static boolean isPalindrome(char[] arr, int l, int r) {
+        if(l < 0 || r >= arr.length) {
+            return false;
+        }
         while(l <= r) {
-            if(chars[l] != chars[r]) {
+            if(arr[l] != arr[r]) {
                 return false;
             }
             l++;
