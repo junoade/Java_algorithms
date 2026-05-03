@@ -39,21 +39,23 @@ public class P_MakeStar {
 
 
         // 3. 교점 그리기
-        String[] answer = new String[Y_LENGTH];
-        Arrays.fill(answer, ".".repeat(X_LENGTH));
+        char[][] grid = new char[Y_LENGTH][X_LENGTH];
+        for(char[] row : grid) Arrays.fill(row, '.');
 
         for(int i = 0; i < posX.size(); i++) {
             int nx = (int) Math.abs(posX.get(i) + x_min * (-1)); // x=0으로 이동하도록
             int ny = (int) Math.abs(posY.get(i) + y_max * (-1)); // y=0으로 이동하도록 가장 높은 점이 0행이 되도록
-            String tempRow = answer[ny];
-            answer[ny] = replace(tempRow, nx);
+            grid[ny][nx] = '*';
+        }
+
+        String[] answer = new String[Y_LENGTH];
+        for(int i = 0; i < Y_LENGTH; i++) {
+            answer[i] = new String(grid[i]);
         }
 
         return answer;
     }
 
-
-    // a[0] = A, a[1] = B, a[2] = C
     boolean hasCommon(int[] x, int[] y) {
         long A = x[0], B = x[1];
         long C = y[0], D = y[1];
@@ -78,12 +80,6 @@ public class P_MakeStar {
             }
         }
         return true;
-    }
-
-    String replace(String tempRow, int idx) {
-        char[] temp = tempRow.toCharArray();
-        temp[idx] = '*';
-        return new String(temp);
     }
 
     public static void main(String[] args) {
