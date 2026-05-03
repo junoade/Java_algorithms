@@ -4,6 +4,8 @@ import java.util.*;
 
 /**
  * 좌표 압축 개념 적용 - 리트코드 1331
+ * > int[] sorted = Arrays.stream(arr).distinct().sorted().toArray(); 를 쓰면 런타임이 두배 정도 차이가 남.
+ * Spliterator 셋업 비용, 메서드 체이닝 오버헤드, JIT 최적화 차이 라고 함
  * <a href = "https://leetcode.com/problems/rank-transform-of-an-array/">
  */
 public class Leet_RankOfTransformArray {
