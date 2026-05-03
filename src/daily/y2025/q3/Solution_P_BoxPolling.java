@@ -26,18 +26,20 @@ public class Solution_P_BoxPolling {
     // TC2 - 22 6 8
     // TC3 - 2 1 1
     public int solution(int n, int w, int num) {
-        int x = w;
-        int y = n/x + 1;
+        final int x = w;
+        // int y = n/x + 1;
+        final int y = (n + w - 1) / w;
         int[] targetPos = {-1, -1};
         int[][] arr = new int[y][x];
 
+        if(num < 1 || num > n) return 0;
 
         int value = 1;
         boolean flag = false;
 
         for (int i = 0; i < y; i++) {
             if(i % 2 == 0) {
-                // 오른쪽에서 왼쪽으로 증가
+                // 왼쪽에서 오른쪽으로 증가
                 for(int j = 0; j < w; j++) {
                     arr[i][j] = value;
                     if(value == num) {
@@ -53,7 +55,7 @@ public class Solution_P_BoxPolling {
                 }
 
             } else {
-                // 왼쪽에서 오른쪽으로 증가
+                // 오른쪽으로 왼쪽으로 증가
                 for(int j = w - 1; j >= 0; j--) {
                     arr[i][j] = value;
                     if(value == num) {
