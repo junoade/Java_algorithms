@@ -10,7 +10,11 @@ public class P_Triangle {
 
     public int[] solution(int n) {
         final int N = n;
-        int[][] arr = new int[N][N];
+        int[][] arr = new int[N][];
+        for (int i = 0; i < N; i++) {
+            arr[i] = new int[i+1];
+        }
+
 
         int x = 0, y = 0, value = 1, d = 0;
 
