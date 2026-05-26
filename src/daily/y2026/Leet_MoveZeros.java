@@ -13,13 +13,13 @@ public class Leet_MoveZeros {
         int w = 0;
         for(int r = 0; r < N; r++) {
             if(nums[r] != 0) {
-                nums[w] = nums[r];
+                if(r != w) {
+                    int temp = nums[r];
+                    nums[r] = nums[w];
+                    nums[w] = temp;
+                }
                 w++;
             }
-        }
-
-        for(int i = w; i < N; i++) {
-            nums[i] = 0;
         }
     }
 }
