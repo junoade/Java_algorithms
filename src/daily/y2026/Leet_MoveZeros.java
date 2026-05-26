@@ -8,21 +8,18 @@ public class Leet_MoveZeros {
      */
     public void moveZeroes(int[] nums) {
         final int N = nums.length;
-
-        for(int i = 0; i < N; i++) {
-
-            if(nums[i] != 0 ) {
-                continue;
+        // write 포인터, read 포인터 를 둠.
+        // read 포인터 는 O(N) 탐색하면서 write 포인터 위치에 저장
+        int w = 0;
+        for(int r = 0; r < N; r++) {
+            if(nums[r] != 0) {
+                nums[w] = nums[r];
+                w++;
             }
+        }
 
-            int j = i + 1;
-            while(j < N && nums[j] == 0) j++;
-            if(j == N) return;
-
-
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
+        for(int i = w; i < N; i++) {
+            nums[i] = 0;
         }
     }
 }
