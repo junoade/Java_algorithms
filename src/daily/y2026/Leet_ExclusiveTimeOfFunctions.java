@@ -3,22 +3,24 @@ package daily.y2026;
 import java.util.*;
 
 public class Leet_ExclusiveTimeOfFunctions {
-    final String START = "start";
-    final String END = "end";
 
+    // [0, n-1] 범위의 n개의 함수가 콜스택에 저장
+    // 콜 끝나면 popped off
+    // top에 있는 건 현재 실행중인 함수
+    // 함수의 시작과 끝에 로깅함 {function_id}:{"start" | "end"}:{timestamp}
+    // i-th 번쨰 함수에 대한 exclusive time 반환하기
     public int[] exclusiveTime(int n, List<String> logs) {
         int[] answer = new int[n];
 
         Deque<int[]> stack = new ArrayDeque<>();
-
         for (String log : logs) {
-            String[] parsedLog = parse(log);
+            int[] parsedLog = parsedFast(log);
 
-            int funcId = Integer.parseInt(parsedLog[0]);
-            String cmd = parsedLog[1];
-            int timestamp = Integer.parseInt(parsedLog[2]);
+            int funcId = parsedLog[0];
+            int cmd = parsedLog[1];
+            int timestamp = parsedLog[2];
 
-            if (cmd.equals(START)) {
+            if (cmd == 1) { // "start"
                 if (!stack.isEmpty()) {
                     int[] prev = stack.peek();
                     int prevFuncId = prev[0];
@@ -42,8 +44,17 @@ public class Leet_ExclusiveTimeOfFunctions {
         return answer;
     }
 
-    private String[] parse(String log) {
-        return log.split(":");
+    // indexOf 를 활용하여 파싱
+    private int[] parsedFast(String log) {
+        int first = log.indexOf(':');
+        int second = log.indexOf(':', first + 1);
+
+        int funcId = Integer.parseInt(log.substring(0, first));
+        // cmd는 s/e 첫 글자만 보면 됨
+        int isStart = log.charAt(first + 1) == 's' ? 1 : 0;
+        int timestamp = Integer.parseInt(log.substring(second + 1));
+
+        return new int[]{funcId, isStart, timestamp};
     }
 
     public static void main(String[] args) {
