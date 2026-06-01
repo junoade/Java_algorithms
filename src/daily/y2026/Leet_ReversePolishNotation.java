@@ -3,6 +3,8 @@ package daily.y2026;
 import java.util.*;
 
 public class Leet_ReversePolishNotation {
+
+    private final String AVAIL_OPS = "+-*/";
     // postfix notation; operand operand operator
 
     /**
@@ -39,7 +41,7 @@ public class Leet_ReversePolishNotation {
     }
 
     private boolean isOperator(String s) {
-        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/");
+        return AVAIL_OPS.contains(s);
     }
 
     private int getEval(String s, int x, int y) {
