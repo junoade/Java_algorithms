@@ -14,16 +14,16 @@ public class Leet_BuyTickets {
         int time = 0, cursor = 0;
         // k 번째 index 인 사람인 경우, 티켓 차감 후 0인지 체크하고 0 이면 종료.
         while(true) {
-            int idx = cursor++ % L; // 0-based
-            if(tickets[idx] <= 0) {
-                continue;
+            if(tickets[cursor] > 0) {
+                tickets[cursor]--;
+                time++;
             }
 
-            tickets[idx]--;
-            time++;
-            if(idx == k && tickets[idx] == 0) {
+            if(cursor == k && tickets[cursor] == 0) {
                 break;
             }
+
+            cursor = (cursor + 1) % L;
         }
 
         return time;
