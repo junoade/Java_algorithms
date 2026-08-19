@@ -30,35 +30,25 @@ public class Leet_ImplementsQueueUsingStack {
     }
 
     public int pop() {
-        if(!outStack.isEmpty()) {
-            return outStack.pop();
-        }
-
-        while(!inStack.isEmpty()) {
-            int topValue = inStack.pop();
-            outStack.push(topValue);
-        }
-
+        moveToOutStackIfNeeded();
         return outStack.pop();
     }
 
     public int peek() {
-
-        if(!outStack.isEmpty()) {
-            return outStack.peek();
-        }
-
-        while(!inStack.isEmpty()) {
-            int topValue = inStack.pop();
-            outStack.push(topValue);
-        }
-
-        return outStack.peek();
-
+        moveToOutStackIfNeeded();
+        return outStack.peek(); // 실제 개발에선 null 주의
     }
 
     public boolean empty() {
         return inStack.isEmpty() && outStack.isEmpty();
+    }
+
+    private void moveToOutStackIfNeeded() {
+        if(outStack.isEmpty()) {
+            while(!inStack.isEmpty()) {
+                outStack.push(inStack.pop());
+            }
+        }
     }
 
     public static void main(String[] args) {
