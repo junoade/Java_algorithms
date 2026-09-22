@@ -18,16 +18,17 @@ public class Study_ContinuousMax {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        int sum = 0;
+        int windowSum = 0;
         for(int i = 0; i < m; i++) {
-            sum += arr[i];
+            windowSum += arr[i];
         }
 
-        int maxSum = sum;
-        for(int i = 1; i <= n - m; i++) {
-            int prevIdx = i - 1, nextIdx = i + m - 1;
-            sum = sum - arr[prevIdx] + arr[nextIdx];
-            maxSum = Math.max(maxSum, sum);
+        int maxSum = windowSum;
+        // m 번째 부터 한칸씩 이동하도록 리팩토링
+        for(int i = m; i < n; i++) {
+            int leftIdx = i - m, rightIdx = i;
+            windowSum += arr[rightIdx] - arr[leftIdx];
+            maxSum = Math.max(maxSum, windowSum);
         }
 
         System.out.println(maxSum);
