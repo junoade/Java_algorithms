@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class Study_Perm01 {
 
     static StringBuilder sb = new StringBuilder();
-    static StringBuilder path = new StringBuilder();
+    static int[] path;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,6 +15,7 @@ public class Study_Perm01 {
         String[] inputs = br.readLine().split(" ");
         final int N = Integer.parseInt(inputs[0]), M = Integer.parseInt(inputs[1]);
 
+        path = new int[M];
         recursive(N, M, 0);
 
         System.out.print(sb);
@@ -22,16 +23,20 @@ public class Study_Perm01 {
 
     static void recursive(int n, int m, int depth) {
         if(depth == m) {
-            sb.append(path).append('\n');
+            printArr(path);
             return;
         }
 
         for(int i = 1; i <= n; i++) {
-            int len = path.length();
-            path.append(i).append(" ");
+            path[depth] = i;
             recursive(n, m, depth + 1);
-            path.setLength(len); // 이전 path 를 유지하기 위해 back-traverse
-
         }
+    }
+
+    static void printArr(int[] arr) {
+        for(int i : arr) {
+            sb.append(i).append(" ");
+        }
+        sb.append("\n");
     }
 }
